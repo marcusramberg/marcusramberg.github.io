@@ -1,0 +1,39 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=description content><meta name=generator content="Hugo 0.72.0"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet href=/css/style.css type=text/css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type=text/css><link rel=alternate href=/index.xml type=application/rss+xml title="Suburban Nerd"><title>Creating a standalone Damon with Moose and friends - Suburban Nerd</title></head><body><header><div class="container clearfix"><a class=path href=http://marcus.nordaaker.com>[Suburban Nerd]</a>
+<span class=caret># _</span><div class=right></div></div></header><div class=container><main role=main class=article><article class=single itemscope itemtype=http://schema.org/BlogPosting><div class=meta><span class=key>published on</span>
+<span class=val><time itemprop=datePublished datetime=2009-01-30>January 30, 2009</time></span><br><span class=key>tags:</span>
+<span class=val><a href=/tags/daemon>Daemon</a>
+<a href=/tags/logging>Logging</a>
+<a href=/tags/moose>Moose</a>
+<a href=/tags/perl>Perl</a></span></div><h1 class=headline itemprop=headline>Creating a standalone Damon with Moose and friends</h1><section class=body itemprop=articleBody><p>I recently needed to create a persistent daemon to do some maintenance tasks for <a href=http://osx.iusethis.com/>iusethis</a>. Turns out that building these with the postmodern object system <a href=http://www.iinteractive.com/moose/>Moose</a> is  really easy.</p><p>For those of you not in the know, Moose has the concept of 'Roles', stolen from the Perl 6 project. Roles work kind of like a mix-in that you can add to your class to make it super powerful :)   (For the extra curious, you can read more details about Roles in Perl6 <a href=http://en.wikipedia.org/wiki/Perl_6#Roles>here</a>).</p><p>In order to get my daemon running, I just created a Class like this:</p><blockquote><pre>package iusethis::Daemon;
+use Moose;
+with MooseX::Daemonize;
+
+after 'start' =&gt; sub {
+    my $self=shift;
+    return unless $self-&gt;is_daemon();
+    while(1) { $self-&gt;do_menial_tasks(); sleep($until_lunch); }
+1;</pre></blockquote><p><em>Some notes about the code above</em></p><ul><li>You can see how the role is added using the 'with' keyword.</li><li>In Moose, the 'after' modifier means that our code will hook up to the 'after' method provided by a superclass or Role and run after that method.</li><li>The return is because the code forks, to avoid it from running in both the child and the parent.</li></ul><p>I also created a simple script to initialize it (<em>scripts/daemon.pl</em> in my case):</p><blockquote><pre>#!/usr/bin/perl -w
+use strict;
+use iusethis::Daemon;
+my $daemon = iusethis::Daemon-&gt;new_with_options();
+my ($command) = @{$daemon-&gt;extra_argv};
+$daemon-&gt;$command if $daemon-&gt;can($command);
+warn($daemon-&gt;status_message); exit($daemon-&gt;exit_code);</pre></blockquote><p>And just like that we have a fully operational persistant server process. You could stuff this thing into /etc/init.d/ if you like, and it will respond to all the expected things like start, stop, restart status. the Daemonize role also supports <a href=http://search.cpan.org/~nuffin/MooseX-Getopt-0.15/lib/MooseX/Getopt.pm>MooseX::GetOpt</a>. It is enabled by running new_with_options like we did in the class above. This which means your deamon already responds to a common set of command line switches. Run it with -h to see this output:</p><blockquote><pre>usage: daemon.pl [-f] [long options...]
+        --pidbase
+        --progname
+        --stop_timeout
+        --basedir
+        --pidfile
+        -f --foreground</pre></blockquote><p>From the 'pidbase' argument, you might have guessed that your fledgling daemon stores the process id in a file just like all the grown up daemons  do, in order to be able to check if it's still alive.  By default, it will store this file in /var/run/, and pidbase is useful for specifying a different path, for instance if you need to run your daemon on a system where you don't have root privileges. the -f flag is also useful for debugging your daemon, as it will keep the process running in the foreground, rather than detaching it.</p><p>Running in the foreground is nice when you are writing your daemon, but once you have it running, it's nice to have some log output to see what it's been up to lately. I decide to use MooseX::LogDispatch, which is a Moose role which makes it trivial to integrate Log::Dispatch into your daemon. This is what I added to my class to get it running:</p><blockquote><pre>with qw/MooseX::LogDispatch::Levels/;</pre><pre>has log_dispatch_conf =&gt; (
+   is =&gt; 'ro',
+   isa =&gt; 'HashRef',
+   lazy =&gt; 1,
+   required =&gt; 1,</pre><pre>              default =&gt; sub {
+     my $self = shift;
+        {
+          class     =&gt; 'Log::Dispatch::File',
+          min_level =&gt; 'debug',
+          mode      =&gt; 'append',
+          filename  =&gt; "/var/log/daemon.log",
+            format  =&gt; '[%d] [%p] %m%n',
+        }</pre><pre>    },</pre><pre> );</pre></blockquote><p>For a more trivial case, you could have just passed in the file name to log to, but I wanted to tweak the log format. (You can read more about the format <a href=http://search.cpan.org/~miyagawa/Log-Dispatch-Config-1.02/lib/Log/Dispatch/Config.pm#GLOBAL_PARAMETERS>here</a>). This style also allows you to easily adjust the verbosity of your logging. Since this default is lazily evaluated, you could create separate setters for parts of the format and override them on the command line, thanks to MooseX::GetOpt. Once this is set up, all you need to do is use the appropriate level like this</p><blockquote><pre>$self-&gt;info('Arne sucks at squash');</pre></blockquote><p>and an appropriate message is created in your log file:</p><blockquote><pre>[Thu Jan 29 23:50:09 2009] [info] Arne sucks at squash.</pre></blockquote><p>And that's all you need. I hope this article was useful in showing how you can create your own hellspawn. Enjoy, and use responsibly. :)</p></section></article></main></div><footer><div class=container><span class=copyright>&copy; 2020 Suburban Nerd - <a rel=license href=http://creativecommons.org/licenses/by/4.0/>CC BY 4.0</a></span></div></footer></body></html>

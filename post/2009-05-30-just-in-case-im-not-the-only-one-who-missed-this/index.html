@@ -1,0 +1,11 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=description content><meta name=generator content="Hugo 0.72.0"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet href=/css/style.css type=text/css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type=text/css><link rel=alternate href=/index.xml type=application/rss+xml title="Suburban Nerd"><title>Just in case I'm not the only one who missed this. - Suburban Nerd</title></head><body><header><div class="container clearfix"><a class=path href=http://marcus.nordaaker.com>[Suburban Nerd]</a>
+<span class=caret># _</span><div class=right></div></div></header><div class=container><main role=main class=article><article class=single itemscope itemtype=http://schema.org/BlogPosting><div class=meta><span class=key>published on</span>
+<span class=val><time itemprop=datePublished datetime=2009-05-30>May 30, 2009</time></span><br><span class=key>tags:</span>
+<span class=val><a href=/tags/perl-dbic-sql>Perl DBIC SQL</a></span></div><h1 class=headline itemprop=headline>Just in case I'm not the only one who missed this.</h1><section class=body itemprop=articleBody><p>Seems <a href=http://search.cpan.org/dist/DBIx-Class/>DBIx::Class</a>, the greatest Perl object-relational mapper ever, has recently added support for subqueries:</p><pre>22:04  * marcus looks at DBIC cookbook, realizes it has subquery support now. 
+          *head explosion*
+22:04 < @mst> since 081, yes :)</pre><p>Even tho most things can be rewritten as joins, this has been one of the few things I've been missing in this excellent ORM. It's still marked as experimental, but I'm totally going to be using it from now on :) Apparently this is how it works:</p><pre>
+  my $s_query = $c->model('DB::License')->search({ free => 1 });
+  $c->stash->{apps}= $c-model('DB::App')->search(
+    { license_id => { 'IN' => $s_query->get_column('id')->as_query },
+  });
+</pre><p>PS. Note the disclaimers below the cookbook example.</p></section></article></main></div><footer><div class=container><span class=copyright>&copy; 2020 Suburban Nerd - <a rel=license href=http://creativecommons.org/licenses/by/4.0/>CC BY 4.0</a></span></div></footer></body></html>

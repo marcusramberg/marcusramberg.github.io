@@ -1,0 +1,43 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=description content><meta name=generator content="Hugo 0.72.0"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet href=/css/style.css type=text/css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type=text/css><link rel=alternate href=/index.xml type=application/rss+xml title="Suburban Nerd"><title>Building Ansible Modules with Perl and Mojolicious - Suburban Nerd</title></head><body><header><div class="container clearfix"><a class=path href=http://marcus.nordaaker.com>[Suburban Nerd]</a>
+<span class=caret># _</span><div class=right></div></div></header><div class=container><main role=main class=article><article class=single itemscope itemtype=http://schema.org/BlogPosting><div class=meta><span class=key>published on</span>
+<span class=val><time itemprop=datePublished datetime=2014-10-05>October 05, 2014</time></span></div><h1 class=headline itemprop=headline>Building Ansible Modules with Perl and Mojolicious</h1><section class=body itemprop=articleBody><p>While setting up <a href=http://theoutput.co/>Output</a>, we decided to automate all our
+infrastructure using <a href=http://ansible.com/>Ansible</a>. This lets us easily do
+zero downtime releases and create new workers as needed to scale. We&rsquo;ve got
+roles for haproxy, postgresql, nginx, our app servers and a lot more. One thing
+we&rsquo;ve been handling manually so far is DNS. We&rsquo;re happy Cloudflare users, and
+they have one of the best DNS admin tools I&rsquo;ve used, but still I felt like we
+could do better.</p><p>My friend <a href=http://thorsen.pm>Jan Henning</a> also felt this way, and had already
+written
+<a href=http://search.cpan.org/~jhthorsen/Mojo-Cloudflare-0.03/README.pod>Mojo::Cloudflare</a>,
+a simple API client for Cloudflare. Even tho Ansible is Python-based, you can
+write your plugins in whatever language you like, so I decided to glue the two
+together. This turned out to be quite easy. First you need to tell ansible you
+can handle json:</p><pre><code>#!/usr/bin/env perl
+# WANT_JSON
+</code></pre><p>Then we get the module argument file from the args, and parse the JSON:</p><pre><code>use Mojo::JSON;
+use Mojo::Util qw/slurp/;
+
+my $json = Mojo::JSON-&gt;new;
+my $args = $json-&gt;decode(slurp($ARGV[0]));
+</code></pre><p>And then you just process those arguments and do your thing. Lets say you want
+to check for required arguments:</p><pre><code>for (qw/email api_key zone name/) {
+  fail(&quot;$_ is a required argument&quot;) unless exists $args-&gt;{$_};
+}
+</code></pre><p>My fail method looks like this:</p><pre><code>sub fail {
+  my $msg = shift;
+  print $json-&gt;encode({failed =&gt; 1, message =&gt; $msg});
+  exit 1;
+}
+</code></pre><p>The important thing here is to exit 1, the json response is icing on the cake.
+For success you could could do something like this:</p><pre><code>print $json-&gt;encode({changed =&gt; \$changed, record =&gt; $current-&gt;id});
+</code></pre><p>Note the bool reference to make Mojo::JSON return true/false. <code>$changed</code>
+will make the difference between OK and CHANGED output in your ansible run.</p><p>Put your module in a library/ sub directory of your playbook folder, and you
+can just use it in your playbook like this:</p><pre><code>local_action: cloudflare zone=theoutput.co name=sentry type=CNAME 
+content=sentry.nordaaker.com service_mode=1 email={{cloudflare_user}} 
+api_key={{cloudflare_api_key}}
+</code></pre><p>I store my Cloudflare credentials in an ansible-vault and just include that in
+my playbook. Note that using this module will require having the latest version
+of Mojo::Cloudflare installed. If you want to run it on the remote server
+rather than as a local_action, that server must also have the module.</p><p>Anyways, if you want to try it yourself, you can find the latest version of my
+cloudflare ansible module
+<a href=https://gist.github.com/marcusramberg/1ba1ecdc8fe2a3870602>here</a>.</p></section></article></main></div><footer><div class=container><span class=copyright>&copy; 2020 Suburban Nerd - <a rel=license href=http://creativecommons.org/licenses/by/4.0/>CC BY 4.0</a></span></div></footer></body></html>

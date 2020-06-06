@@ -1,9 +1,0 @@
-baseURL = "http://marcus.nordaaker.com"
-languageCode = "en-us"
-title = "Suburban Nerd"
-theme = "nord"
-disqusShortname = "marcusramberg"
-[markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true # This is *necessary* for ox-hugo to work well with Hugo 0.60.0+

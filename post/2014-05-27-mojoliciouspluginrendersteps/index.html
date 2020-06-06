@@ -1,0 +1,69 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=description content><meta name=generator content="Hugo 0.72.0"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet href=/css/style.css type=text/css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" type=text/css><link rel=alternate href=/index.xml type=application/rss+xml title="Suburban Nerd"><title>Mojolicious::Plugin::RenderSteps - Suburban Nerd</title></head><body><header><div class="container clearfix"><a class=path href=http://marcus.nordaaker.com>[Suburban Nerd]</a>
+<span class=caret># _</span><div class=right></div></div></header><div class=container><main role=main class=article><article class=single itemscope itemtype=http://schema.org/BlogPosting><div class=meta><span class=key>published on</span>
+<span class=val><time itemprop=datePublished datetime=2014-05-27>May 27, 2014</time></span><br><span class=key>tags:</span>
+<span class=val><a href=/tags/mojolicious>mojolicious</a>
+<a href=/tags/perl>perl</a>
+<a href=/tags/mojoconf>mojoconf</a></span></div><h1 class=headline itemprop=headline>Mojolicious::Plugin::RenderSteps</h1><section class=body itemprop=articleBody><p>This weekend I attended the <a href=http://mojoconf.org/>MojoConf</a> hackathon, which was great fun. I had
+some interesting talks with the rest of the core team, and I collaborated with
+Joel Berger on <a href=http://github.com/marcusramberg/mojo-pg>Mojo::PG</a>, an adaptor for the Mojo::IOLoop for Postgres.
+Joel is almost done with a Pool implementation as well, and we&rsquo;ll probably be
+on CPAN sometime this week.</p><p>I also wrote a simple plugin-helper, which I think greatly simplify working
+with async controllers in Mojolicious. This what you have to do to setup async
+actions in mojolicious at the moment:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-perl data-lang=perl><span style=color:#75715e>#!/usr/bin/env perl</span>
+<span style=color:#66d9ef>use</span> Mojolicious::Lite;
+
+get <span style=color:#e6db74>&#39;/foo&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#66d9ef>sub</span> {
+<span style=color:#66d9ef>my</span> $self <span style=color:#f92672>=</span> shift;
+  $self<span style=color:#f92672>-&gt;</span>render_later;
+
+<span style=color:#75715e># Concurrent requests</span>
+
+<span style=color:#66d9ef>my</span> $delay<span style=color:#f92672>=</span>Mojo::IOLoop<span style=color:#f92672>-&gt;</span>delay(
+    <span style=color:#66d9ef>sub</span> {
+      <span style=color:#66d9ef>my</span> $delay <span style=color:#f92672>=</span> shift;
+<span style=color:#66d9ef>my</span> $url   <span style=color:#f92672>=</span> Mojo::URL<span style=color:#f92672>-&gt;</span><span style=color:#66d9ef>new</span>(<span style=color:#e6db74>&#39;api.metacpan.org/v0/module/_search&#39;</span>);
+      $url<span style=color:#f92672>-&gt;</span>query({sort <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;date:desc&#39;</span>});
+$self<span style=color:#f92672>-&gt;</span>ua<span style=color:#f92672>-&gt;</span>get($url<span style=color:#f92672>-&gt;</span>clone<span style=color:#f92672>-&gt;</span>query({<span style=color:#e6db74>q =&gt; </span><span style=color:#e6db74>&#39;mojo&#39;</span>}) <span style=color:#f92672>=&gt;</span> $delay<span style=color:#f92672>-&gt;</span>begin);
+      $self<span style=color:#f92672>-&gt;</span>ua<span style=color:#f92672>-&gt;</span>get($url<span style=color:#f92672>-&gt;</span>clone<span style=color:#f92672>-&gt;</span>query({<span style=color:#e6db74>q =&gt; </span><span style=color:#e6db74>&#39;mango&#39;</span>}) <span style=color:#f92672>=&gt;</span> $delay<span style=color:#f92672>-&gt;</span>begin);
+},
+
+    <span style=color:#75715e># Delayed rendering</span>
+    <span style=color:#66d9ef>sub</span> {
+      <span style=color:#66d9ef>my</span> ($delay, $mojo, $mango) <span style=color:#f92672>=</span> @_;
+      $self<span style=color:#f92672>-&gt;</span>stash (
+        mojo  <span style=color:#f92672>=&gt;</span> $mojo<span style=color:#f92672>-&gt;</span>res<span style=color:#f92672>-&gt;</span>json(<span style=color:#e6db74>&#39;/hits/hits/0/_source/release&#39;</span>),
+        mango <span style=color:#f92672>=&gt;</span> $mango<span style=color:#f92672>-&gt;</span>res<span style=color:#f92672>-&gt;</span>json(<span style=color:#e6db74>&#39;/hits/hits/0/_source/release&#39;</span>)
+      );
+      $self<span style=color:#f92672>-&gt;</span>render;
+    }
+
+)<span style=color:#f92672>-&gt;</span>catch(<span style=color:#66d9ef>sub</span> { shift<span style=color:#f92672>-&gt;</span>render_exception(shift) });
+<span style=color:#f92672>\</span>$delay<span style=color:#f92672>-&gt;</span>wait <span style=color:#66d9ef>unless</span> Mojo::IOLoop<span style=color:#f92672>-&gt;</span>is_running;</code></pre></div><p>With the help of my new helper, that can be turned into this:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-perl data-lang=perl><span style=color:#75715e>#!/usr/bin/env perl</span>
+<span style=color:#66d9ef>use</span> Mojolicious::Lite;
+
+plugin <span style=color:#e6db74>&#39;RenderSteps&#39;</span>;
+
+get <span style=color:#e6db74>&#39;/foo&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#66d9ef>sub</span> {
+
+<span style=color:#75715e># Concurrent requests</span>
+
+<span style=color:#66d9ef>my</span> $self<span style=color:#f92672>=</span>shift;
+  $self<span style=color:#f92672>-&gt;</span>render<span style=color:#f92672>*</span>steps(
+<span style=color:#66d9ef>sub</span> {
+<span style=color:#66d9ef>my</span> $delay <span style=color:#f92672>=</span> shift;
+      <span style=color:#66d9ef>my</span> $url <span style=color:#f92672>=</span> Mojo::URL<span style=color:#f92672>-&gt;</span><span style=color:#66d9ef>new</span>(<span style=color:#e6db74>&#39;api.metacpan.org/v0/module/\_search&#39;</span>);
+$url<span style=color:#f92672>-&gt;</span>query({sort <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;date:desc&#39;</span>});
+      $self<span style=color:#f92672>-&gt;</span>ua<span style=color:#f92672>-&gt;</span>get($url<span style=color:#f92672>-&gt;</span>clone<span style=color:#f92672>-&gt;</span>query({<span style=color:#e6db74>q =&gt; </span><span style=color:#e6db74>&#39;mojo&#39;</span>})  <span style=color:#f92672>=&gt;</span> $delay<span style=color:#f92672>-&gt;</span>begin);
+$self<span style=color:#f92672>-&gt;</span>ua<span style=color:#f92672>-&gt;</span>get($url<span style=color:#f92672>-&gt;</span>clone<span style=color:#f92672>-&gt;</span>query({<span style=color:#e6db74>q =&gt; </span><span style=color:#e6db74>&#39;mango&#39;</span>}) <span style=color:#f92672>=&gt;</span> $delay<span style=color:#f92672>-&gt;</span>begin);
+    },
+    <span style=color:#75715e># Automatic rendering at after last step</span>
+    <span style=color:#66d9ef>sub</span> {
+      <span style=color:#66d9ef>my</span> ($delay, $mojo, $mango) <span style=color:#f92672>=</span> @<span style=color:#960050;background-color:#1e0010>*;</span>
+<span style=color:#960050;background-color:#1e0010>$</span>self<span style=color:#f92672>-&gt;</span>stash (
+        mojo  <span style=color:#f92672>=&gt;</span> $mojo<span style=color:#f92672>-&gt;</span>res<span style=color:#f92672>-&gt;</span>json(<span style=color:#e6db74>&#39;/hits/hits/0/\_source/release&#39;</span>),
+mango <span style=color:#f92672>=&gt;</span> <span style=color:#f92672>\</span>$mango<span style=color:#f92672>-&gt;</span>res<span style=color:#f92672>-&gt;</span>json(<span style=color:#e6db74>&#39;/hits/hits/0/\_source/release&#39;</span>)
+);
+}
+);
+};</code></pre></div><p>PS. We are looking for someone to host Mojoconf 2015, and we&rsquo;ve donated 2000
+EUR to get the next host kickstarted. Contact Oslo.pm if you&rsquo;re interested.</p></section></article></main></div><footer><div class=container><span class=copyright>&copy; 2020 Suburban Nerd - <a rel=license href=http://creativecommons.org/licenses/by/4.0/>CC BY 4.0</a></span></div></footer></body></html>
