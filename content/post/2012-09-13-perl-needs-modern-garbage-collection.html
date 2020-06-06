@@ -1,0 +1,13 @@
+---
+date: "2012-09-13T00:00:00Z"
+tags:
+- gc
+- Perl
+title: Perl needs modern garbage collection
+---
+<p>Chromatic just wrote a list of <a href="http://www.modernperlbooks.com/mt/2012/09/features-perl-5-needs-in-2012.html">important features that Perl 5 needs</a>. While I agree with most of the listed ones (and in fact <a href="http://marcus.nordaaker.com/moving-to-moose-hackathon-2013/">contributed to the new p5-mop</a> proposal during the recent Hackathon), I found one feature curiously missing.</p>
+<div></div>
+<div>I mean, JWZ pointed this out in 1998; <a href="http://www.jwz.org/doc/gc.html">Perl garbage collection is a bad joke</a>. That was 14 years ago, and the situation is the same. It is trivial to create a circular reference and trip it up. Especially when you are doing evented code where callbacks are common, it is quite easy to close over some variable and create a leak. Languages like C#, Ruby and Java has this sorted already with variants of mark and sweep-based systems, Python has built in cycle detectors in their ref count implementation, and even Objective-C manages to detect cycles fairly well with their new compile-time automated reference counting.&nbsp;</div>
+<div></div>
+<div></div>
+<div>Don't worry so much about adding sugar to the syntax. This is a feature Perl really needs.&nbsp;</div>

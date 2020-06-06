@@ -1,0 +1,4 @@
+baseURL = "http://marcus.nordaaker.com"
+languageCode = "en-us"
+title = "Suburban Nerd"
+theme = "Nord"

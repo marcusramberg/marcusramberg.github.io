@@ -1,0 +1,25 @@
+---
+date: "2009-03-25T00:00:00Z"
+tags:
+- Englightenment
+- Moose
+- Perl
+title: A proper TryCatch for Perl
+---
+<p>While grown-up languages like Java has mechanisms to let you  throw Exception objects, and to catch them in different places and do interesting things with them, most Perl code just dies with a error message of some sort (If you're lucky, it's even helpful, and reporting the mistake you did inside your own code, rather than going belly up inside the module itself. </p>
+<p>This is usually good enough for most people. Using a block eval, you can catch the error and deal with it, even doing a regular expression against it to handle different errors. Still, some people have been writing CPAN modules to add this functionality to the language. Unfortunately, up until now these attempts has mostly fallen into two categories; 'cludgy addon', and 'source filter powered'. </p>
+<p>With some determination, and thanks to recent industrial power tools like <a href="http://search.cpan.org/~vpit/Variable-Magic/lib/Variable/Magic.pm">Variable::Magic</a> and <a href="http://search.cpan.org/~flora/B-Hooks-EndOfScope/lib/B/Hooks/EndOfScope.pm">B::Hooks::EndOfScope</a> <a href="http://search.cpan.org/~ash/">Ash Berlin</a> has been able to put together a first class try / catch mechanism without using source filters. Check out the <a href="http://search.cpan.org/~ash/TryCatch/lib/TryCatch.pm">TryCatch synopsis from CPAN</a>:</p>
+<p><code>
+<pre>
+sub foo {
+   try {
+       die SomeClass->new(code=>404) if $notfound;
+       return "return value from foo";
+   }
+      catch (Some::Class $e where { $_->code > 100 } ) {
+   }
+}</pre>
+<p></code></p>
+<p>As you see, you can specify types of objects to handle, and this mechanism supports receiving Moose type constraints, including complex MooseX::Types constructs like '<code>Dict[code => Int]</code>'.  It's also quite useful that you can return out of the function from inside a try block, unlike an eval, with just returns from the eval block.</p>
+<p>If you want to try it yourself, just do $ cpan TryCatch and start playing. The docs are a bit sparse at the moment, but it's easy enough to figure out. Expect the docs to be improved quite soon. </p>
+<p>I believe modules like this and <a href="http://search.cpan.org/~flora/MooseX-Declare-0.09/lib/MooseX/Declare.pm">MooseX::Declare</a> represent a new trend in Perl 5, where CPAN authors extend the syntax of Perl itself using Perl. It'll be interesting to see what turns up in this space in the coming months. I found <a href="http://rjbs.manxome.org/rubric/entry/1739">Ricardo's musings</a> on the subject to be of particular interest.</p>

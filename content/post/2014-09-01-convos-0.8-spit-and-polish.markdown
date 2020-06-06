@@ -1,0 +1,56 @@
+---
+date: "2014-09-01T00:00:00Z"
+published: true
+title: Convos 0.8 - Spit and polish
+---
+
+This fall we released Convos 0.8, with the latest update 0.83 hitting CPAN today.
+As we're inching closer to 1.0, we've been focusing on polishing the user 
+interface, fixing bugs and other rough patches in the user experience.
+One of the most important improvements in this round is how you switch
+between conversations.
+
+Previously, when you pressed shift+enter, we shifted focus to the conversation list
+on the top, to let you tab through your most recent conversations . Now, shift enter
+will open up a panel on your right hand, where you can tab through all known
+channels and usernames, or you can start typing to filter the list. You can
+even join a new channel by typing in a unknown channel name and selecting the
+server to join on (if you have more than one).
+
+![Change channel dialog](https://www.evernote.com/shard/s22/sh/493629eb-7410-4807-8b9a-77ffdfcb008c/1a67e008fb5105064c856aab56226b57/deep/0/Nordaaker-demo----mojo-on-perlorg---oh-hai!.png)
+
+The same list is available by hitting the hamburger menu to the right of the
+channel list, and of course this works just as well on mobile.
+
+![Change on mobile](https://www.evernote.com/shard/s22/sh/82aeb0af-cdf8-4b6c-8c26-7db02cfb1ecf/65c5c8c90bab5007ea6c697b00223b42/deep/0/Screenshot-01.09.14-13-52.png)
+
+We've also replaced the dropdowns on the top with slide in panels that works
+more smoothly both on the desktop and mobile.
+
+Another new feature in the 0.8 series that I really enjoy is the recent activity line.
+We now track whenever a channel goes out of focus, either because you switch
+to another tab, or to another channel. When you return, there's a line showing you 
+what's new since you switching away.
+
+![screenshot of activity line](https://www.evernote.com/shard/s22/sh/6ecc7f7d-3784-4f17-b2ed-398ac12ba558/10a5b6575f6438be4abcc9c66c01adae/deep/0/Nordaaker-demo----mojo-on-perlorg---oh-hai!.png)
+
+Desktop notifications, which was broken in 0.7, has been fixed and improved a
+lot as well. Now, we ask you if you want desktop notifications like this - it
+works in all major browsers.
+
+![screenshot of notification
+question](https://www.evernote.com/shard/s22/sh/d3453d9b-d20a-4896-93c2-7c229b4ed991/569988001dab2c4495f76fc279ae14c7/deep/0/Nordaaker-demo----uberadmins-on-linpro.png)
+
+We've also changed the way web sockets are handled, now we always load new
+messages on web socket connect, significantly improving stability and
+performance. We've also added some more irc commands. You can now /kick people,
+and /names will show you who's op and voiced in the current channel at any time.
+
+There's alot of other bugfixes and improvements as well, if you're interested in learning more you
+can check out the [full changelog](https://github.com/Nordaaker/convos/blob/master/CHANGELOG.md), 
+[try our demo](http://demo.convos.by/) or follow our [Installation instructions](https://github.com/Nordaaker/convos/#installation) to run your own.
+
+Our main focus for the next release is cleaning up the Connection Manager, and there's already
+solid progress on this work. I'll leave you with this [sneak peak of the new channel join dialog](http://home.thorsen.pm/private/raw/notverysecret/convos/channel-list-2014-08-31-15-11-41.ogv). 
+
+

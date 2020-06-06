@@ -1,0 +1,63 @@
+---
+date: "2009-09-02T00:00:00Z"
+tags:
+- Catalyst
+- crud
+- extensions
+- Perl
+title: Catalyst::Plugin::AutoCRUD
+---
+<p><em>One major factor in Catalyst's success has been extensibility. I plan to<br />
+do a series on extensions that I've found useful recently. To kick it off,<br />
+I'll feature a model which gives me a simple and useful admin interface to<br />
+my DBIx::Class models.</em></p>
+<p>When I first got involved with MVC Web Frameworks like Maypole and Ruby on<br />
+Rails, a big selling point was the ability to generate CRUD (Create/Read/<br />
+Update/Delete) interfaces to your data model. Ruby on Rails does this through<br />
+a mechanism called scaffolding, where it adds a set of actions to your<br />
+controller. It soon became apparent that these CRUD frameworks did not live<br />
+up to their promise as a base for creating your own custom actions. Usually,<br />
+you spend more time customizing these controllers than you would just<br />
+implementing the features you require.</p>
+<p>However, there is still a good use for these for giving your admins a<br />
+direct interface to your data model. There has been several iterations of<br />
+these tools for the Catalyst framework, but with Catalyst::Plugin::AutoCRUD,<br />
+I've finally found something easy to plug into your existing app, which<br />
+integrates well with most setups.</p>
+<p><img src="http://marcus.nordaaker.com/wp-content/uploads/2009/09/autocrud.png" alt="autocrud" title="autocrud" width="500" height="306" class="size-full wp-image-2942" /></p>
+<p>For most apps, all you need to do is plug it into the main application class<br />
+by adding AutoCRUD to your list of plugins. This will plug a complete CRUD<br />
+application, including controllers and view and templates into your app.<br />
+By default it will attach itself at '/autocrud', but you can easily change<br />
+that in config. Just add this to your config file:</p>
+<pre><plugin ::AutoCRUD>
+      basepath admin
+</plugin></pre>
+<p>and it will respond to /admin/* instead. Another common requirement is to<br />
+add authentication for the admin interface. One way to accomplish that is<br />
+by using Catalyst's auto handler functionality. Add a method like this in<br />
+your Root controller</p>
+<pre>sub auto :Private {
+    my ( $self, $c ) = @_;
+    if ($c->action->reverse =~ /^autocrud\//) {
+        $c->authenticate({},'users');
+    }
+    return 1;
+}</pre>
+<p>Note that my example is using HTTP Basic auth. The actual authenticate call<br />
+needs to be customized for your realm.</p>
+<p>AutoCRUD supports multiple DBIC Schemas, and if will automatically provide you<br />
+with a list to let you pick which one to work with. After that, you choose<br />
+a Result class, and you have access to an extensive AJAX-enhanched database<br />
+admin tool. You can search and browse data, as well as edit it and add new<br />
+rows easily. AutoCRUD also understands your DBIC relationships, so you can<br />
+easily see data related to the current rows.</p>
+<p>Like it's predecessors, I do not recommend trying to make this tool<br />
+into a generic 'allweb'-application. However, if you use it for what it is,<br />
+you can save countless of development hours making trivial admin tools. Since<br />
+it works again your DBIC Schema, you'll also get the advantage of keeping<br />
+your business logic in the data model. Things like DBIC timestamps will<br />
+Just Work.</p>
+<p><em>There still might be some polishing left to do on AutoCRUD, but I already<br />
+find it a hugely useful tool.   You can install it just like you would any other CPAN module using </p>
+<p><code>$ cpan Catalyst::Plugin::AutoCRUD</code></em></p>

@@ -1,0 +1,10 @@
+---
+date: "2014-05-09T00:00:00Z"
+title: Mojoconf 2014
+---
+
+In just a couple of weeks, we are arranging a new conference in Oslo - [Mojoconf](http://mojoconf.org/) - A conference dedicated to the Mojolicious Web Framework, the real time web and Perl. It is a three day affair, with commercial training on friday, talks on saturday, and a hackthon on sunday.
+
+Attending the conference and the hackathon is just 20EUR, and Oslo in the spring time is not bad either, so obey the Hypnotoad and come to Oslo the weekend 23-25 may!
+
+![Hypnotoad](http://buffalobeast.com/wp-content/uploads/2012/07/hypnotoad.gif)

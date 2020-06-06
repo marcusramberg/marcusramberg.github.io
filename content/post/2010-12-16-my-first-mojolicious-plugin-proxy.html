@@ -1,0 +1,12 @@
+---
+date: "2010-12-16T00:00:00Z"
+tags:
+- http
+- Mojolicious
+- Perl
+title: My first Mojolicious Plugin - Proxy
+---
+<p>A few days ago I uploaded my first Mojolicious plugin to CPAN,<a href="http://search.cpan.org/~mramberg/Mojolicious-Plugin-Proxy-0.2/"> Mojolicious::Plugin::Proxy</a>. My use case was that I am writing a simple single-file html5/javascript app, which needed to access a remote JSON feed. When running on a device with file:/// URLs, cross-site scripting is not an issue, but when running on a web-server, my appis unable to reach that remote JSON feed, so I wrote this plugin to allow me to simply proxy JSON requests from the local server to the remote one. This is how it works</p>
+<pre>    plugin 'proxy';<br />
+    get 'ws' =&gt; sub { shift-&gt;proxy_to('http://remote_url', with_query_params=&gt;1);</pre>
+<p>The fact that Mojolicious includes a full async http client made this plugin trivial to implement. The unit tests is almost more code than the module itself.</p>

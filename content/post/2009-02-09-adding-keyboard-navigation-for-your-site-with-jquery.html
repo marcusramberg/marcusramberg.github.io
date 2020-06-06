@@ -1,0 +1,28 @@
+---
+date: "2009-02-09T00:00:00Z"
+tags:
+- Javascript
+- User Interface
+title: Adding smooth keyboard navigation to your site using javascript and jQuery.
+---
+<p>One of Arne's long-standing wishes for our video bookmarking site <a href="http://iwatchthis.com/">iwatchthis.com</a> has been proper keyboard navigation. Today I finally found some <a href="http://www.perlfoundation.org/perl5/index.cgi?tuit">tuits</a>, and Just Fucking Did It. </p>
+<p>Turns out that with a couple of javascript libraries, it was surprisingly easy. Step one was the <a href="http://www.openjs.com/scripts/events/keyboard_shortcuts/">keyboard shortcuts</a> library, which let you hook up to keyboard input in this simple fashion:</p>
+<pre>   shortcut('up',function() {
+        alert('Lucy in the sky with diamonds');
+   })</pre>
+<p>However, rather than bore you further you with Beatles lyrics, I hooked it up to the excellent <a href="http://flesler.blogspot.com/2007/10/jqueryscrollto.html">scrollTo</a> jQuery extension, which lets you smoothly scroll to any anchor in in the page (I added anchors into the video item for convenience):</p>
+<pre> 
+    $.scrollTo('#item_'+num, 313); // Donald number of miliseconds
+</pre>
+<p>I also used the URLs from the pager to allow left and right arrows to go to the  next/previous page, if those links exist. (This is a simple matter of setting window.location).</p>
+<pre>shortcut("left",function() {
+    var elem=$('.pager .prev');
+    if (elem[0]) { window.location=elem.attr('href'); }
+});</pre>
+<p>That was easy, but one issue still remained. Whenever you click inside a flash area (which most videos on iwatchthis are), flash cowardly steals the focus disabling our nice keyboard navigation, however I found a  way to work around this:</p>
+<pre>$('embed').focus(function(){
+    window.setTimeout(function() {$('#item_1')[0].focus(); }, 500);
+    
+})</pre>
+<p>Allows us to  pilfer back the keyboard focus from the flash widgets shortly after giving it up. Note that in my tests, setting the focus on the document body rather than a link did not work. Also, it seems that this event does not trigger on safari. :/<br />
+The good thing about unobtrusive javascript like this tho, is that is downgrades nicely, rather than leaving your visitor with an unusable site. Too bad we can't do much about the flash requirement.</p>
