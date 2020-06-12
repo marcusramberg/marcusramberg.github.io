@@ -7,7 +7,7 @@
 alt="Workflow Part 1"/>
 &lt;/figure>
 &lt;ul>
-&lt;li>First I resize the photo to a more handy format, as the iPhone pictures out of the box takes about 2 GB, which is a bit much for a web page.&lt;/li>
+&lt;li>First I resize the photo to a more handy format, as the iPhone pictures out of the box takes about 2 MB, which is a bit much for a web page.&lt;/li>
 &lt;li>Then I tell working copy to pull latest posts to make sure we&amp;rsquo;re not behind&lt;/li>
 &lt;li>We ask for a title and set that to a variable&lt;/li>
 &lt;/ul>
