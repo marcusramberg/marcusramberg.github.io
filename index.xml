@@ -3,7 +3,7 @@
 &lt;img src="https://marcus.nordaaker.com/images/wiring.jpg"
 alt="Valve control wiring"/>
 &lt;/figure>
-&lt;p>Basically I just combined a z-wave light switch with the solenoid switch, stuffed it into a waterproof box and connected it to the water hose. Presto:&lt;/p>
+&lt;p>Basically I just combined a z-wave light switch with the solenoid switch, stuffed it into a waterproof box and connected it to the water hose. I also added some heat shrink with glue to waterproof the solenoid sensor. I took some leftover connectors I had to attach it to a garden hose connector. Presto:&lt;/p>
 &lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
 &lt;iframe src="https://www.youtube.com/embed/ffNVmQsQRH0?autoplay=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
 &lt;/div>
