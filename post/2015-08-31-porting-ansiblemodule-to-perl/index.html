@@ -2,8 +2,10 @@
 <span class=sr-only>Toggle navigation</span>
 <span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button>
 <a class=navbar-brand href=https://marcus.nordaaker.com>Suburban Nerd</a></div><div class="collapse navbar-collapse" id=bs-example-navbar-collapse-1><ul class="nav navbar-nav navbar-right"><li><a href=/>Home</a></li><li><a href=/post/>Archives</a></li></ul></div></div></nav><header class=intro-header style="background-image:linear-gradient( rgba(0,0,0,0.5),rgba(0,0,0,0.5) ),url('https://marcus.nordaaker.com/img/post-bg.jpg')"><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><h1>Porting AnsibleModule to Perl.</h1><h2 class=subheading></h2><span class=meta>A 4 minute read,
-Posted on 2015-08-31<br><a class=tag href=/tags/perl>perl</a>
-,
+<small>2015-08-31</small>
+&minus; &#127991;
+<a class=tag href=/tags/perl>perl</a>
+&#127991;
 <a class=tag href=/tags/ansible>ansible</a></span></div></div></div></div></header><article><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><pre><code>“All animals are equal, but some animals are more equal than others.”
 ― George Orwell, Animal Farm
 </code></pre><p>Ansible is a great orchestration tool, which I&rsquo;ve used extensively for the last years to build infrastructure, or even to accomplish routine tasks like restarting a group of web servers one by one or patching a bunch of servers for critical security issues.</p><p>Ansible is written in Python, but you can write modules in anything that can generate JSON. In fact, I wrote about <a href>making a Perl based cloudflare module</a> earlier. However, to quote <a href>the official documentation</a>:</p><pre><code>As mentioned, if you are writing a module in Python, there are some very powerful shortcuts you can use. Modules are still transferred as one file, but an arguments file is no longer needed, so these are not only shorter in terms of code, they are actually FASTER in terms of execution time.

@@ -2,14 +2,16 @@
 <span class=sr-only>Toggle navigation</span>
 <span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button>
 <a class=navbar-brand href=https://marcus.nordaaker.com>Suburban Nerd</a></div><div class="collapse navbar-collapse" id=bs-example-navbar-collapse-1><ul class="nav navbar-nav navbar-right"><li><a href=/>Home</a></li><li><a href=/post/>Archives</a></li></ul></div></div></nav><header class=intro-header style="background-image:linear-gradient( rgba(0,0,0,0.5),rgba(0,0,0,0.5) ),url('https://marcus.nordaaker.com/img/post-bg.jpg')"><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><h1>Easily integrating your Mojolicious app with Facebook.</h1><h2 class=subheading></h2><span class=meta>A 2 minute read,
-Posted on 2011-01-08<br><a class=tag href=/tags/facebook>facebook</a>
-,
+<small>2011-01-08</small>
+&minus; &#127991;
+<a class=tag href=/tags/facebook>facebook</a>
+&#127991;
 <a class=tag href=/tags/mojolicious>mojolicious</a>
-,
+&#127991;
 <a class=tag href=/tags/oauth>oauth</a>
-,
+&#127991;
 <a class=tag href=/tags/oauth2>oauth2</a>
-,
+&#127991;
 <a class=tag href=/tags/perl>perl</a></span></div></div></div></div></header><article><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p>Facebook has recently released a<a href=http://graph.facebook.com/> new Graph API</a>. It's a simple RESTish API, and uses the newly released OAuth2 spec for authorization. This makes it a great match for <a href=http://mojolicio.us>Mojolicious</a>, and using my new <a href=https://github.com/marcusramberg/mojolicious-plugin-oauth2>OAuth2</a> plugin (Also coming to a CPAN mirror near you), it's absolutely trivial.</p><p>Here is a simple Lite example. Just register an app with facebook to get the key and secret.</p><pre>
    use Mojolicious::Lite;
    # configure the plugin

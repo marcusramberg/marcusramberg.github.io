@@ -2,8 +2,10 @@
 <span class=sr-only>Toggle navigation</span>
 <span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button>
 <a class=navbar-brand href=https://marcus.nordaaker.com>Suburban Nerd</a></div><div class="collapse navbar-collapse" id=bs-example-navbar-collapse-1><ul class="nav navbar-nav navbar-right"><li><a href=/>Home</a></li><li><a href=/post/>Archives</a></li></ul></div></div></nav><header class=intro-header style="background-image:linear-gradient( rgba(0,0,0,0.5),rgba(0,0,0,0.5) ),url('https://marcus.nordaaker.com/img/post-bg.jpg')"><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><h1>Coturn for WebRTC NAT Traversal</h1><h2 class=subheading></h2><span class=meta>A 2 minute read,
-Posted on 2020-06-13<br><a class=tag href=/tags/perl>perl</a>
-,
+<small>2020-06-13</small>
+&minus; &#127991;
+<a class=tag href=/tags/perl>perl</a>
+&#127991;
 <a class=tag href=/tags/convos>convos</a></span></div></div></div></div></header><article><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p>This article will show you how to set up <a href=https://github.com/coturn/coturn>Coturn</a>. This is a service that allows hosts behind NAT to communicate peer to peer with webrtc. STUN is helping to negotiate port/ip and TURN will proxy the actual traffic if all else fails.</p><p>We&rsquo;re using this with <a href=https://convos.chat/>Convos</a>&rsquo; video IRC feature, but the same applies to other WebRTC projects.</p><h2 id=installation>Installation</h2><p>I&rsquo;ll be assuming you&rsquo;re on Ubutunu for this tutorial, so users on other distros will have to adjust the setup for their environment. First we&rsquo;ll install the actual ubuntu package. If you don&rsquo;t already have it, you will also need letsencrypt to generate valid ssl certs.</p><div class=code><div></div><p>apt-install coturn certbot</p></div><p>Then we edit <code>/etc/turnserver.conf</code> - It should look roughly like this:</p><div class=code><div></div><p>listening-port=3478
 tls-listening-port=5349</p><p>listening-ip=<server public interface>
 relay-ip=<ip used for relaying>
