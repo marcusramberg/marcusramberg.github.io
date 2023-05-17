@@ -1,7 +1,9 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Making (things|code|mischief|mistakes)."><meta name=author content="Marcus Ramberg"><meta name=generator content="Hugo 0.72.0"><title>Building Ansible Modules with Perl and Mojolicious -- marcus</title><link href=https://marcus.means.no//css/bootstrap.min.css rel=stylesheet><link href=https://marcus.means.no//css/clean-blog.min.css rel=stylesheet><link href=//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css rel=stylesheet type=text/css><link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel=stylesheet type=text/css><link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel=stylesheet type=text/css><meta property="og:title" content="Building Ansible Modules with Perl and Mojolicious"><meta property="og:url" content="https://marcus.means.no//"><meta property="og:image" content="https://marcus.means.no//"></head><body><nav class="navbar navbar-default navbar-custom navbar-fixed-top"><div class=container-fluid><div class="navbar-header page-scroll"><button type=button class=navbar-toggle data-toggle=collapse data-target=#bs-example-navbar-collapse-1>
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Making (things|code|mischief|mistakes)."><meta name=author content="Marcus Ramberg"><meta name=generator content="Hugo 0.111.3"><title>Building Ansible Modules with Perl and Mojolicious -- marcus</title><link href=https://marcus.means.no//css/bootstrap.min.css rel=stylesheet><link href=https://marcus.means.no//css/clean-blog.min.css rel=stylesheet><link href=//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css rel=stylesheet type=text/css><link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel=stylesheet type=text/css><link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel=stylesheet type=text/css><meta property="og:title" content="Building Ansible Modules with Perl and Mojolicious"><meta property="og:url" content="https://marcus.means.no//"><meta property="og:image" content="https://marcus.means.no//"></head><body><nav class="navbar navbar-default navbar-custom navbar-fixed-top"><div class=container-fluid><div class="navbar-header page-scroll"><button type=button class=navbar-toggle data-toggle=collapse data-target=#bs-example-navbar-collapse-1>
 <span class=sr-only>Toggle navigation</span>
-<span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button>
-<a class=navbar-brand href=https://marcus.means.no/>marcus</a></div><div class="collapse navbar-collapse" id=bs-example-navbar-collapse-1><ul class="nav navbar-nav navbar-right"><li><a href=/>Home</a></li><li><a href=/tags/>Tags</a></li><li><a href=/post/>Archives</a></li></ul></div></div></nav><header class=intro-header style="background-image:linear-gradient( rgba(0,0,0,0.5),rgba(0,0,0,0.5) ),url('https://marcus.means.no//img/post-bg.jpg')"><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><h1>Building Ansible Modules with Perl and Mojolicious</h1><h2 class=subheading></h2><span class=meta><small>2014-10-05</small>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span></button>
+<a class=navbar-brand href=https://marcus.means.no/>marcus</a></div><div class="collapse navbar-collapse" id=bs-example-navbar-collapse-1><ul class="nav navbar-nav navbar-right"><li><a href=/>Home</a></li><li><a href=/tags/>Tags</a></li><li><a href=/post/>Archives</a></li></ul></div></div></nav><header class=intro-header style="background-image:linear-gradient( rgba(0,0,0,.5),rgba(0,0,0,.5) ),url(https://marcus.means.no//img/post-bg.jpg)"><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><h1>Building Ansible Modules with Perl and Mojolicious</h1><h2 class=subheading></h2><span class=meta><small>2014-10-05</small>
 &minus; &#127991;
 <a class=tag href=/tags/perl>perl</a>
 &#127991;
@@ -17,27 +19,27 @@ written
 a simple API client for Cloudflare. Even tho Ansible is Python-based, you can
 write your plugins in whatever language you like, so I decided to glue the two
 together. This turned out to be quite easy. First you need to tell ansible you
-can handle json:</p><pre><code>#!/usr/bin/env perl
+can handle json:</p><pre tabindex=0><code>#!/usr/bin/env perl
 # WANT_JSON
-</code></pre><p>Then we get the module argument file from the args, and parse the JSON:</p><pre><code>use Mojo::JSON;
+</code></pre><p>Then we get the module argument file from the args, and parse the JSON:</p><pre tabindex=0><code>use Mojo::JSON;
 use Mojo::Util qw/slurp/;
 
 my $json = Mojo::JSON-&gt;new;
 my $args = $json-&gt;decode(slurp($ARGV[0]));
 </code></pre><p>And then you just process those arguments and do your thing. Lets say you want
-to check for required arguments:</p><pre><code>for (qw/email api_key zone name/) {
-  fail(&quot;$_ is a required argument&quot;) unless exists $args-&gt;{$_};
+to check for required arguments:</p><pre tabindex=0><code>for (qw/email api_key zone name/) {
+  fail(&#34;$_ is a required argument&#34;) unless exists $args-&gt;{$_};
 }
-</code></pre><p>My fail method looks like this:</p><pre><code>sub fail {
+</code></pre><p>My fail method looks like this:</p><pre tabindex=0><code>sub fail {
   my $msg = shift;
   print $json-&gt;encode({failed =&gt; 1, message =&gt; $msg});
   exit 1;
 }
 </code></pre><p>The important thing here is to exit 1, the json response is icing on the cake.
-For success you could could do something like this:</p><pre><code>print $json-&gt;encode({changed =&gt; \$changed, record =&gt; $current-&gt;id});
+For success you could could do something like this:</p><pre tabindex=0><code>print $json-&gt;encode({changed =&gt; \$changed, record =&gt; $current-&gt;id});
 </code></pre><p>Note the bool reference to make Mojo::JSON return true/false. <code>$changed</code>
 will make the difference between OK and CHANGED output in your ansible run.</p><p>Put your module in a library/ sub directory of your playbook folder, and you
-can just use it in your playbook like this:</p><pre><code>local_action: cloudflare zone=theoutput.co name=sentry type=CNAME
+can just use it in your playbook like this:</p><pre tabindex=0><code>local_action: cloudflare zone=theoutput.co name=sentry type=CNAME
 content=sentry.nordaaker.com service_mode=1 email={{cloudflare_user}}
 api_key={{cloudflare_api_key}}
 </code></pre><p>I store my Cloudflare credentials in an ansible-vault and just include that in
@@ -45,4 +47,8 @@ my playbook. Note that using this module will require having the latest version
 of Mojo::Cloudflare installed. If you want to run it on the remote server
 rather than as a local_action, that server must also have the module.</p><p>Anyways, if you want to try it yourself, you can find the latest version of my
 cloudflare ansible module
-<a href=https://gist.github.com/marcusramberg/1ba1ecdc8fe2a3870602>here</a>.</p><script src=https://giscus.app/client.js data-repo=marcusramberg/blog data-repo-id="MDEwOlJlcG9zaXRvcnkyNzAwODc0ODA=" data-category=Announcements data-category-id=DIC_kwDOEBk1OM4CVAZX data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=transparent_dark data-lang=en crossorigin=anonymous async></script></div></div></div></article><hr><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a href=mailto:marcus@means.no><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i></span></a></li><li><a rel=me href=https://hachyderm.io/@marcus><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-mastodown fa-stack-1x fa-inverse"></i></span></a></li><li><a rel=me href=https://github.com/marcusramberg><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-github fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="copyright text-muted"><a href=https://github.com/marcusramberg/blog/>Code released under the Apache 2.0 license.</a></p></div></div></div></footer><script src=https://marcus.means.no//js/jquery.min.js></script><script src=https://marcus.means.no//js/bootstrap.min.js></script></body></html>
+<a href=https://gist.github.com/marcusramberg/1ba1ecdc8fe2a3870602>here</a>.</p><script src=https://giscus.app/client.js data-repo=marcusramberg/blog data-repo-id="MDEwOlJlcG9zaXRvcnkyNzAwODc0ODA=" data-category=Announcements data-category-id=DIC_kwDOEBk1OM4CVAZX data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=transparent_dark data-lang=en crossorigin=anonymous async></script></div></div></div></article><hr><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a href=mailto:marcus@means.no><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
+<i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i></span></a></li><li><a rel=me href=https://hachyderm.io/@marcus><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
+<i class="fa fa-mastodown fa-stack-1x fa-inverse"></i></span></a></li><li><a rel=me href=https://github.com/marcusramberg><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
+<i class="fa fa-github fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="copyright text-muted"><a href=https://github.com/marcusramberg/blog/>Code released under the Apache 2.0 license.</a></p></div></div></div></footer><script src=https://marcus.means.no//js/jquery.min.js></script>
+<script src=https://marcus.means.no//js/bootstrap.min.js></script></body></html>
