@@ -44,7 +44,8 @@ actions in mojolicious at the moment:</p><div class=highlight><pre tabindex=0 st
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>)<span style=color:#f92672>-&gt;</span>catch(<span style=color:#66d9ef>sub</span> { shift<span style=color:#f92672>-&gt;</span>render_exception(shift) });
-</span></span><span style=display:flex><span><span style=color:#f92672>\</span>$delay<span style=color:#f92672>-&gt;</span>wait <span style=color:#66d9ef>unless</span> Mojo::IOLoop<span style=color:#f92672>-&gt;</span>is_running;</span></span></code></pre></div><p>With the help of my new helper, that can be turned into this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-perl data-lang=perl><span style=display:flex><span><span style=color:#75715e>#!/usr/bin/env perl</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>\</span>$delay<span style=color:#f92672>-&gt;</span>wait <span style=color:#66d9ef>unless</span> Mojo::IOLoop<span style=color:#f92672>-&gt;</span>is_running;
+</span></span></code></pre></div><p>With the help of my new helper, that can be turned into this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-perl data-lang=perl><span style=display:flex><span><span style=color:#75715e>#!/usr/bin/env perl</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> Mojolicious::Lite;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>plugin <span style=color:#e6db74>&#39;RenderSteps&#39;</span>;
@@ -71,7 +72,8 @@ actions in mojolicious at the moment:</p><div class=highlight><pre tabindex=0 st
 </span></span><span style=display:flex><span>);
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>);
-</span></span><span style=display:flex><span>};</span></span></code></pre></div><p>PS. We are looking for someone to host Mojoconf 2015, and we&rsquo;ve donated 2000
+</span></span><span style=display:flex><span>};
+</span></span></code></pre></div><p>PS. We are looking for someone to host Mojoconf 2015, and we&rsquo;ve donated 2000
 EUR to get the next host kickstarted. Contact Oslo.pm if you&rsquo;re interested.</p><script src=https://giscus.app/client.js data-repo=marcusramberg/blog data-repo-id="MDEwOlJlcG9zaXRvcnkyNzAwODc0ODA=" data-category=Announcements data-category-id=DIC_kwDOEBk1OM4CVAZX data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=transparent_dark data-lang=en crossorigin=anonymous async></script></div></div></div></article><hr><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a href=mailto:marcus@means.no><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
 <i class="fa-regular fa-envelope fa-stack-1x fa-inverse"></i></span></a></li><li><a rel=me href=https://hachyderm.io/@marcus><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
 <i class="fa-brands fa-mastodon fa-stack-1x fa-inverse"></i></span></a></li><li><a rel=me href=https://github.com/marcusramberg><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
