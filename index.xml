@@ -56,7 +56,7 @@ white-space fixes :)&lt;/p>
 it off. However now I have &lt;a href="https://github.com/marcusramberg/nix-config/commit/ca25bedf9a2d5516fd8131f1c99467538f7a7ffa">a better
 solution&lt;/a>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-lua" data-lang="lua">&lt;span style="display:flex;">&lt;span>vim.api.nvim_create_autocmd({ &lt;span style="color:#e6db74">&amp;#34;BufEnter&amp;#34;&lt;/span> }, {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> attern &lt;span style="color:#f92672">=&lt;/span> vim.fn.expand(&lt;span style="color:#e6db74">&amp;#34;~&amp;#34;&lt;/span>) &lt;span style="color:#f92672">..&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/Source/{nimdow,nixpkgs}/*&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pattern &lt;span style="color:#f92672">=&lt;/span> vim.fn.expand(&lt;span style="color:#e6db74">&amp;#34;~&amp;#34;&lt;/span>) &lt;span style="color:#f92672">..&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/Source/{nimdow,nixpkgs}/*&amp;#34;&lt;/span>,
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> callback &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">function&lt;/span>()
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vim.b.autoformat &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">false&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>,

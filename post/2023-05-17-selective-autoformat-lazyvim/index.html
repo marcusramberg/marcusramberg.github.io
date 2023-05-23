@@ -17,7 +17,7 @@ to turn it off with <code>&lt;space>uf</code> or suffer review comments about ex
 white-space fixes :)</p><p>That kinda works, but I sometimes forget, and have to undo after save and turn
 it off. However now I have <a href=https://github.com/marcusramberg/nix-config/commit/ca25bedf9a2d5516fd8131f1c99467538f7a7ffa>a better
 solution</a>:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span>vim.api.nvim_create_autocmd({ <span style=color:#e6db74>&#34;BufEnter&#34;</span> }, {
-</span></span><span style=display:flex><span>  attern <span style=color:#f92672>=</span> vim.fn.expand(<span style=color:#e6db74>&#34;~&#34;</span>) <span style=color:#f92672>..</span> <span style=color:#e6db74>&#34;/Source/{nimdow,nixpkgs}/*&#34;</span>,
+</span></span><span style=display:flex><span>  pattern <span style=color:#f92672>=</span> vim.fn.expand(<span style=color:#e6db74>&#34;~&#34;</span>) <span style=color:#f92672>..</span> <span style=color:#e6db74>&#34;/Source/{nimdow,nixpkgs}/*&#34;</span>,
 </span></span><span style=display:flex><span>  callback <span style=color:#f92672>=</span> <span style=color:#66d9ef>function</span>()
 </span></span><span style=display:flex><span>    vim.b.autoformat <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>
 </span></span><span style=display:flex><span>  <span style=color:#66d9ef>end</span>,
