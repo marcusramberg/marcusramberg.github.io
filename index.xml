@@ -1,4 +1,25 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>@’s marcus - marcus</title><link>https://marcus.means.no/https://marcus.means.no/</link><description>All entries in marcus on marcus</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Fri, 04 Aug 2023 11:08:16 +0200</lastBuildDate><atom:link href="https://marcus.means.no/" rel="self" type="application/rss+xml"/><item><title>Lazy days</title><link>https://marcus.means.no/post/content/post/2023-08-04-lazy-days/</link><pubDate>Fri, 04 Aug 2023 11:08:16 +0200</pubDate><author/><guid>https://marcus.means.no/post/content/post/2023-08-04-lazy-days/</guid><description>&lt;figure>&lt;img src="https://marcus.means.no/images/2023-08-04-Lazy-daya.jpg"
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>@’s marcus - marcus</title><link>https://marcus.means.no/https://marcus.means.no/</link><description>All entries in marcus on marcus</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Sat, 04 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://marcus.means.no/" rel="self" type="application/rss+xml"/><item><title>First Experiences With Homely Alarm</title><link>https://marcus.means.no/post/2023-11-04-first-experiences-with-homely-alarm/</link><pubDate>Sat, 04 Nov 2023 00:00:00 +0000</pubDate><author/><guid>https://marcus.means.no/post/2023-11-04-first-experiences-with-homely-alarm/</guid><description>&lt;p>For the last few years, we&amp;rsquo;ve had managed alarm service from &lt;a href="https://www.sectoralarm.no">Sector Alarm&lt;/a>. It&amp;rsquo;s mostly
+been OK, but the price has been increasing every year, and they never upgrade our components,
+so when I learned about the offering from &lt;a href="https://homely.no">Homely&lt;/a>, I was intrigued.&lt;/p>
+&lt;p>Basically you own your own components, and pay a monthly fee for monitoring. The components
+are mostly &lt;code>Zigbee&lt;/code>-based, and there&amp;rsquo;s a home assistant integration to get the status into my
+home assistant setup, so I decided to give it a go.&lt;/p>
+&lt;p>That was about 3 months ago, and our agreement with sector alarm finally expired last week, so
+I&amp;rsquo;ve been busy replacing the old components with the new ones. The new components are mostly smaller
+and nicer looking, it&amp;rsquo;s all paired to their proprietary hub, and it&amp;rsquo;s all managed through their app.&lt;/p>
+&lt;p>Pairing through QR code mostly worked OK, even tho it sometimes took quite a while to find the devices.
+I think the app is some sort of web-view, and it&amp;rsquo;s not the most responsive thing in the world, but it
+mostly works OK. We have two Yale Doorman components, and after factory resetting the door locks, they
+also integrated nicely with the new &lt;code>Zigbee&lt;/code> modules. I think the integration with the door locks could
+be better.&lt;/p>
+&lt;p>You have to set door codes separately for each door lock, but now that it&amp;rsquo;s done, it&amp;rsquo;s working
+OK, and you can configure it so unlocking a door disables the alarm. Next up is running a test of the installation to
+check that all the sensors are working as expected, and then setting up the home assistant integration.&lt;/p>
+&lt;p>They support a list of components, and I think it&amp;rsquo;s possible to use other &lt;code>Zigbee&lt;/code> devices, but I haven&amp;rsquo;t
+tested yet. Honestly I wish they had some way of integrating with my existing &lt;code>Zigbee&lt;/code> network, for instance
+by having a &lt;code>MQTT&lt;/code> interface, but I guess that&amp;rsquo;s not their target audience.&lt;/p>
+&lt;p>Will report back when we have some more experience with the system, but all in all, I&amp;rsquo;m happy with the
+experience so far, specially the savings on the monthly fee.&lt;/p></description></item><item><title>Lazy days</title><link>https://marcus.means.no/post/content/post/2023-08-04-lazy-days/</link><pubDate>Fri, 04 Aug 2023 11:08:16 +0200</pubDate><author/><guid>https://marcus.means.no/post/content/post/2023-08-04-lazy-days/</guid><description>&lt;figure>&lt;img src="https://marcus.means.no/images/2023-08-04-Lazy-daya.jpg"
 alt="Lazy daya" width="1280"/>
 &lt;/figure></description></item><item><title>Making your own binary format</title><link>https://marcus.means.no/post/2023-06-11-making-your-own-binary-format/</link><pubDate>Sun, 11 Jun 2023 23:24:36 +0200</pubDate><author/><guid>https://marcus.means.no/post/2023-06-11-making-your-own-binary-format/</guid><description>&lt;p>I learned a lot from this article detailing how to make your own &lt;code>.com&lt;/code> executable format for Linux. Also loved this little nugget:&lt;/p>
 &lt;blockquote>
@@ -287,7 +308,4 @@ alt="Svartdalsparken" width="1280"/>
 post is one of the better introductions to Convos and IRC out there. Worth checking out if you want to learn more :)&lt;/p></description></item><item><title>Merry Christmas 2020</title><link>https://marcus.means.no/post/2020-12-18-merry-christmas-2020/</link><pubDate>Fri, 18 Dec 2020 00:00:00 +0100</pubDate><author/><guid>https://marcus.means.no/post/2020-12-18-merry-christmas-2020/</guid><description>
 &lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
 &lt;iframe src="https://www.youtube.com/embed/gset79KMmt0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
-&lt;/div></description></item><item><title>Nice Jenkins/Groovy cheatsheet</title><link>https://marcus.means.no/post/2020-12-16-nice-jenkins-groovy-cheatsheet/</link><pubDate>Wed, 16 Dec 2020 09:46:00 +0100</pubDate><author/><guid>https://marcus.means.no/post/2020-12-16-nice-jenkins-groovy-cheatsheet/</guid><description/></item><item><title>Dance monkey but with babies</title><link>https://marcus.means.no/post/2020-12-04-dance-monkey-but-with-babies/</link><pubDate>Fri, 04 Dec 2020 00:25:00 +0100</pubDate><author/><guid>https://marcus.means.no/post/2020-12-04-dance-monkey-but-with-babies/</guid><description>
-&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-&lt;iframe src="https://www.youtube.com/embed/lVZLHJIOVYY" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
-&lt;/div></description></item></channel></rss>
+&lt;/div></description></item><item><title>Nice Jenkins/Groovy cheatsheet</title><link>https://marcus.means.no/post/2020-12-16-nice-jenkins-groovy-cheatsheet/</link><pubDate>Wed, 16 Dec 2020 09:46:00 +0100</pubDate><author/><guid>https://marcus.means.no/post/2020-12-16-nice-jenkins-groovy-cheatsheet/</guid><description/></item></channel></rss>
