@@ -11,15 +11,48 @@
 &#127991;
 <a class=tag href=/tags/extensions>extensions</a>
 &#127991;
-<a class=tag href=/tags/perl>perl</a></span></div></div></div></div></header><article><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p><em>One major factor in Catalyst's success has been extensibility. I plan to<br>do a series on extensions that I've found useful recently. To kick it off,<br>I'll feature a model which gives me a simple and useful admin interface to<br>my DBIx::Class models.</em></p><p>When I first got involved with MVC Web Frameworks like Maypole and Ruby on<br>Rails, a big selling point was the ability to generate CRUD (Create/Read/<br>Update/Delete) interfaces to your data model. Ruby on Rails does this through<br>a mechanism called scaffolding, where it adds a set of actions to your<br>controller. It soon became apparent that these CRUD frameworks did not live<br>up to their promise as a base for creating your own custom actions. Usually,<br>you spend more time customizing these controllers than you would just<br>implementing the features you require.</p><p>However, there is still a good use for these for giving your admins a<br>direct interface to your data model. There has been several iterations of<br>these tools for the Catalyst framework, but with Catalyst::Plugin::AutoCRUD,<br>I've finally found something easy to plug into your existing app, which<br>integrates well with most setups.</p><p><img src=http://marcus.nordaaker.com/wp-content/uploads/2009/09/autocrud.png alt=autocrud title=autocrud width=500 height=306 class="size-full wp-image-2942"></p><p>For most apps, all you need to do is plug it into the main application class<br>by adding AutoCRUD to your list of plugins. This will plug a complete CRUD<br>application, including controllers and view and templates into your app.<br>By default it will attach itself at '/autocrud', but you can easily change<br>that in config. Just add this to your config file:</p><pre><plugin ::autocrud>
+<a class=tag href=/tags/perl>perl</a></span></div></div></div></div></header><article><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p><em>One major factor in Catalyst's success has been extensibility. I plan to
+do a series on extensions that I've found useful recently. To kick it off,
+I'll feature a model which gives me a simple and useful admin interface to
+my DBIx::Class models.</em></p><p>When I first got involved with MVC Web Frameworks like Maypole and Ruby on
+Rails, a big selling point was the ability to generate CRUD (Create/Read/
+Update/Delete) interfaces to your data model. Ruby on Rails does this through
+a mechanism called scaffolding, where it adds a set of actions to your
+controller. It soon became apparent that these CRUD frameworks did not live
+up to their promise as a base for creating your own custom actions. Usually,
+you spend more time customizing these controllers than you would just
+implementing the features you require.</p><p>However, there is still a good use for these for giving your admins a
+direct interface to your data model. There has been several iterations of
+these tools for the Catalyst framework, but with Catalyst::Plugin::AutoCRUD,
+I've finally found something easy to plug into your existing app, which
+integrates well with most setups.</p><p><img src=http://marcus.nordaaker.com/wp-content/uploads/2009/09/autocrud.png alt=autocrud title=autocrud width=500 height=306 class="size-full wp-image-2942"></p><p>For most apps, all you need to do is plug it into the main application class
+by adding AutoCRUD to your list of plugins. This will plug a complete CRUD
+application, including controllers and view and templates into your app.
+By default it will attach itself at '/autocrud', but you can easily change
+that in config. Just add this to your config file:</p><pre><plugin ::autocrud>
       basepath admin
-</plugin></pre><p>and it will respond to /admin/* instead. Another common requirement is to<br>add authentication for the admin interface. One way to accomplish that is<br>by using Catalyst's auto handler functionality. Add a method like this in<br>your Root controller</p><pre>sub auto :Private {
+</plugin></pre><p>and it will respond to /admin/* instead. Another common requirement is to
+add authentication for the admin interface. One way to accomplish that is
+by using Catalyst's auto handler functionality. Add a method like this in
+your Root controller</p><pre>sub auto :Private {
     my ( $self, $c ) = @_;
     if ($c->action->reverse =~ /^autocrud\//) {
         $c->authenticate({},'users');
     }
     return 1;
-}</pre><p>Note that my example is using HTTP Basic auth. The actual authenticate call<br>needs to be customized for your realm.</p><p>AutoCRUD supports multiple DBIC Schemas, and if will automatically provide you<br>with a list to let you pick which one to work with. After that, you choose<br>a Result class, and you have access to an extensive AJAX-enhanched database<br>admin tool. You can search and browse data, as well as edit it and add new<br>rows easily. AutoCRUD also understands your DBIC relationships, so you can<br>easily see data related to the current rows.</p><p>Like it's predecessors, I do not recommend trying to make this tool<br>into a generic 'allweb'-application. However, if you use it for what it is,<br>you can save countless of development hours making trivial admin tools. Since<br>it works again your DBIC Schema, you'll also get the advantage of keeping<br>your business logic in the data model. Things like DBIC timestamps will<br>Just Work.</p><p><em>There still might be some polishing left to do on AutoCRUD, but I already<br>find it a hugely useful tool. You can install it just like you would any other CPAN module using</p><p><code>$ cpan Catalyst::Plugin::AutoCRUD</code></em></p><script src=https://giscus.app/client.js data-repo=marcusramberg/blog data-repo-id="MDEwOlJlcG9zaXRvcnkyNzAwODc0ODA=" data-category=Announcements data-category-id=DIC_kwDOEBk1OM4CVAZX data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=transparent_dark data-lang=en crossorigin=anonymous async></script></div></div></div></article><hr><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a href=mailto:marcus@means.no><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
+}</pre><p>Note that my example is using HTTP Basic auth. The actual authenticate call
+needs to be customized for your realm.<p>AutoCRUD supports multiple DBIC Schemas, and if will automatically provide you
+with a list to let you pick which one to work with. After that, you choose
+a Result class, and you have access to an extensive AJAX-enhanced database
+admin tool. You can search and browse data, as well as edit it and add new
+rows easily. AutoCRUD also understands your DBIC relationships, so you can
+easily see data related to the current rows.</p><p>Like it's predecessors, I do not recommend trying to make this tool
+into a generic 'everything'-application. However, if you use it for what it is,
+you can save countless of development hours making trivial admin tools. Since
+it works again your DBIC Schema, you'll also get the advantage of keeping
+your business logic in the data model. Things like DBIC timestamps will
+Just Work.</p><p><em>There still might be some polishing left to do on AutoCRUD, but I already
+find it a hugely useful tool. You can install it just like you would any other CPAN module using</p><p><code>$ cpan Catalyst::Plugin::AutoCRUD</code></em></p><script src=https://giscus.app/client.js data-repo=marcusramberg/blog data-repo-id="MDEwOlJlcG9zaXRvcnkyNzAwODc0ODA=" data-category=Announcements data-category-id=DIC_kwDOEBk1OM4CVAZX data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=transparent_dark data-lang=en crossorigin=anonymous async></script></div></div></div></article><hr><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a href=mailto:marcus@means.no><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
 <i class="fa-regular fa-envelope fa-stack-1x fa-inverse"></i></span></a></li><li><a rel=me href=https://hachyderm.io/@marcus><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
 <i class="fa-brands fa-mastodon fa-stack-1x fa-inverse"></i></span></a></li><li><a rel=me href=https://github.com/marcusramberg><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
 <i class="fa-brands fa-github fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="copyright text-muted"><a href=https://github.com/marcusramberg/blog/>Code released under the MIT license.</a></p></div></div></div></footer><script src=https://marcus.means.no//js/jquery.min.js></script>

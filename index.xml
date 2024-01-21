@@ -1,4 +1,40 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>@’s marcus - marcus</title><link>https://marcus.means.no/https://marcus.means.no/</link><description>All entries in marcus on marcus</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Tue, 02 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://marcus.means.no/" rel="self" type="application/rss+xml"/><item><title>Easily Run LLMs on Nixos</title><link>https://marcus.means.no/post/2024-01-02-easily-run-llms-on-nixos/</link><pubDate>Tue, 02 Jan 2024 00:00:00 +0000</pubDate><author/><guid>https://marcus.means.no/post/2024-01-02-easily-run-llms-on-nixos/</guid><description>&lt;p>With the recent AI craze, it&amp;rsquo;s fun to play with local models. I like &lt;a href="https://ollama.ai/">ollama&lt;/a>,
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>@’s marcus - marcus</title><link>https://marcus.means.no/https://marcus.means.no/</link><description>All entries in marcus on marcus</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Sun, 21 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://marcus.means.no/" rel="self" type="application/rss+xml"/><item><title>Managing Hugo With devenv</title><link>https://marcus.means.no/post/2024-01-21-managing-hugo-with-devenv/</link><pubDate>Sun, 21 Jan 2024 00:00:00 +0000</pubDate><author/><guid>https://marcus.means.no/post/2024-01-21-managing-hugo-with-devenv/</guid><description>&lt;p>I am using the &lt;a href="https://gohugo.io/">Hugo&lt;/a> static site generator to generate this blog. I am also using
+&lt;a href="https://devenv.sh">devenv&lt;/a> to manage my development environments. This also includes the
+&lt;a href="https://github.com/marcusramberg/blog/">blog&lt;/a>. This ensures I can easily build and run the blog locally, and keep up to
+date with the latest Hugo version, without having to install anything on my host system. Devenv also provides easy
+integration with &lt;a href="https://pre-commit.com/">pre-commit&lt;/a> to allow linting of the markdown files, and CI integration with
+GitHub Actions.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nix" data-lang="nix">&lt;span style="display:flex;">&lt;span> pre-commit&lt;span style="color:#f92672">.&lt;/span>hooks &lt;span style="color:#960050;background-color:#1e0010">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> actionlint&lt;span style="color:#f92672">.&lt;/span>enable &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">true&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> markdownlint&lt;span style="color:#f92672">.&lt;/span>enable &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">true&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Devenv activates the environment when I enter the directory, and deactivates it when I leave it. through the use of
+&lt;code>direnv&lt;/code>.This ensures I have the
+correct version of Hugo available when I am working on the blog.&lt;/p>
+&lt;p>Devenv is also convenient for managing small shell scripts. I have a mkpost script that creates a new post for me:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nix" data-lang="nix">&lt;span style="display:flex;">&lt;span> mkpost&lt;span style="color:#f92672">.&lt;/span>exec &lt;span style="color:#960050;background-color:#1e0010">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> POST=content/post/$(date +%Y-%m-%d)-$1.md
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> hugo new $POST
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> nvim $POST
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> git add $POST
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> git commit -m&amp;#34;feat: Add $POST&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;#39;&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>as well as a simple script to add a image from my clipboard to the blog:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nix" data-lang="nix">&lt;span style="display:flex;">&lt;span> pasteimg&lt;span style="color:#f92672">.&lt;/span>exec &lt;span style="color:#960050;background-color:#1e0010">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> FILE=static/images/$(date +%Y-%m-%d)-$1.png
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> if [ -x &amp;#34;$(command -v pngpaste)&amp;#34; ]; then
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> pngpaste $FILE
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> echo &amp;#34;&amp;lt;img src=\&amp;#34;/images/$(basename $FILE)\&amp;#34; width=700/&amp;gt;&amp;#34; | pbcopy
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> else
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> xclip -selection clipboard -t image/png -o &amp;gt; $FILE
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> echo &amp;#34;&amp;lt;img src=\&amp;#34;/images/$(basename $FILE)\&amp;#34; width=700/&amp;gt;&amp;#34; | xclip -selection clipboard
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> fi
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;#39;&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This is super convenient for adding screenshots to the blog, and keeps those screenshots in my environment only while
+I&amp;rsquo;m working on the blog.&lt;/p>
+&lt;img alt="screenshot" src="https://marcus.means.no/images/2024-01-21-screenshot.png" width=700/>
+&lt;p>If you&amp;rsquo;re interested in using devenv, check out the &lt;a href="https://devenv.sh/getting-started/">getting started guide&lt;/a>, and my
+devenv &lt;a href="https://github.com/marcusramberg/blog/blob/master/devenv.nix">configuration&lt;/a> for using it with hugo.&lt;/p></description></item><item><title>Easily Run LLMs on nixOS</title><link>https://marcus.means.no/post/2024-01-02-easily-run-llms-on-nixos/</link><pubDate>Tue, 02 Jan 2024 00:00:00 +0000</pubDate><author/><guid>https://marcus.means.no/post/2024-01-02-easily-run-llms-on-nixos/</guid><description>&lt;p>With the recent AI craze, it&amp;rsquo;s fun to play with local models. I like &lt;a href="https://ollama.ai/">ollama&lt;/a>,
 which lets you easily download and interact with various models. Thanks to this
 recently merged &lt;a href="https://github.com/NixOS/nixpkgs/pull/277442">PR&lt;/a>, it&amp;rsquo;s now trivial to run your own ollama
 service on nixos:&lt;/p>
@@ -32,15 +68,15 @@ check that all the sensors are working as expected, and then setting up the home
 tested yet. Honestly I wish they had some way of integrating with my existing &lt;code>Zigbee&lt;/code> network, for instance
 by having a &lt;code>MQTT&lt;/code> interface, but I guess that&amp;rsquo;s not their target audience.&lt;/p>
 &lt;p>Will report back when we have some more experience with the system, but all in all, I&amp;rsquo;m happy with the
-experience so far, specially the savings on the monthly fee.&lt;/p></description></item><item><title>Lazy days</title><link>https://marcus.means.no/post/content/post/2023-08-04-lazy-days/</link><pubDate>Fri, 04 Aug 2023 11:08:16 +0200</pubDate><author/><guid>https://marcus.means.no/post/content/post/2023-08-04-lazy-days/</guid><description>&lt;figure>&lt;img src="https://marcus.means.no/images/2023-08-04-Lazy-daya.jpg"
-alt="Lazy daya" width="1280"/>
+experience so far, specially the savings on the monthly fee.&lt;/p></description></item><item><title>Lazy days</title><link>https://marcus.means.no/post/2023-08-04-lazy-days/</link><pubDate>Fri, 04 Aug 2023 11:08:16 +0200</pubDate><author/><guid>https://marcus.means.no/post/2023-08-04-lazy-days/</guid><description>&lt;figure>&lt;img src="https://marcus.means.no/images/2023-08-04-Lazy-days.jpg"
+alt="Lazy days" width="1280"/>
 &lt;/figure></description></item><item><title>Making your own binary format</title><link>https://marcus.means.no/post/2023-06-11-making-your-own-binary-format/</link><pubDate>Sun, 11 Jun 2023 23:24:36 +0200</pubDate><author/><guid>https://marcus.means.no/post/2023-06-11-making-your-own-binary-format/</guid><description>&lt;p>I learned a lot from this article detailing how to make your own &lt;code>.com&lt;/code> executable format for Linux. Also loved this
 little nugget:&lt;/p>
 &lt;blockquote>
 &lt;p>All these others are just sitting around, neglected. We should start using them more. I mean, why not? Heck,
 put emojis in your filenames. I&amp;rsquo;m not your dad.
 Alan, if you&amp;rsquo;re reading this: I forbid you to put emojis in your filenames&lt;/p>
-&lt;/blockquote></description></item><item><title>Nixos for the impatient</title><link>https://marcus.means.no/post/2023-06-10-nixos-for-the-impatient/</link><pubDate>Sat, 10 Jun 2023 09:05:21 +0200</pubDate><author/><guid>https://marcus.means.no/post/2023-06-10-nixos-for-the-impatient/</guid><description>&lt;p>Nice pragmatic intro to my favorite Linux distribution.&lt;/p></description></item><item><title>Parsing QR codes by hand</title><link>https://marcus.means.no/post/2023-06-03-parsing-qr-codes-by-hand-/</link><pubDate>Sat, 03 Jun 2023 13:22:55 +0200</pubDate><author/><guid>https://marcus.means.no/post/2023-06-03-parsing-qr-codes-by-hand-/</guid><description>&lt;p>Excellent deep dive on how QR codes work. Kinda tempted to get a QR code tattoo. Question is, what should it say. 🙈&lt;/p></description></item><item><title>Magic eraser is kinda crazy</title><link>https://marcus.means.no/post/2023-06-03-magic-eraser-is-kinda-crazy-/</link><pubDate>Sat, 03 Jun 2023 00:13:01 +0200</pubDate><author/><guid>https://marcus.means.no/post/2023-06-03-magic-eraser-is-kinda-crazy-/</guid><description>&lt;figure>&lt;img src="https://marcus.means.no/images/2023-06-03-Magic-eraser-is-kinda-crazy-.jpg"
+&lt;/blockquote></description></item><item><title>nixOS for the impatient</title><link>https://marcus.means.no/post/2023-06-10-nixos-for-the-impatient/</link><pubDate>Sat, 10 Jun 2023 09:05:21 +0200</pubDate><author/><guid>https://marcus.means.no/post/2023-06-10-nixos-for-the-impatient/</guid><description>&lt;p>Nice pragmatic intro to my favorite Linux distribution.&lt;/p></description></item><item><title>Parsing QR codes by hand</title><link>https://marcus.means.no/post/2023-06-03-parsing-qr-codes-by-hand-/</link><pubDate>Sat, 03 Jun 2023 13:22:55 +0200</pubDate><author/><guid>https://marcus.means.no/post/2023-06-03-parsing-qr-codes-by-hand-/</guid><description>&lt;p>Excellent deep dive on how QR codes work. Kinda tempted to get a QR code tattoo. Question is, what should it say. 🙈&lt;/p></description></item><item><title>Magic eraser is kinda crazy</title><link>https://marcus.means.no/post/2023-06-03-magic-eraser-is-kinda-crazy-/</link><pubDate>Sat, 03 Jun 2023 00:13:01 +0200</pubDate><author/><guid>https://marcus.means.no/post/2023-06-03-magic-eraser-is-kinda-crazy-/</guid><description>&lt;figure>&lt;img src="https://marcus.means.no/images/2023-06-03-Magic-eraser-is-kinda-crazy-.jpg"
 alt="Magic eraser is kinda crazy " width="1280"/>
 &lt;/figure></description></item><item><title>Fixing Annoying Flashing With YouTube When Using an AppleTV With LG OLED TV</title><link>https://marcus.means.no/post/2023-05-30-fixing-annoying-flashing-with-youtube-when-using-an-appletv-with-lg-oled-tv/</link><pubDate>Tue, 30 May 2023 00:00:00 +0000</pubDate><author/><guid>https://marcus.means.no/post/2023-05-30-fixing-annoying-flashing-with-youtube-when-using-an-appletv-with-lg-oled-tv/</guid><description>&lt;p>So for the longest time I&amp;rsquo;ve been annoyed with black flashing whenever I&amp;rsquo;m watching YouTube videos or shorts on
 my AppleTV. I assumed this was related to the black screen between videos, but it turned out this assumption is
@@ -94,8 +130,8 @@ it&amp;rsquo;s slumber, I figured I could use it to improve my setup a bit.&lt;/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hugo&lt;span style="color:#f92672">.&lt;/span>exec &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;hugo serve&amp;#34;&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In &lt;code>Hugo&lt;/code>&amp;rsquo;s case it&amp;rsquo;s not a big deal, but it&amp;rsquo;s nice to have a standard way, specially if you want to add some extra
-flags or whatever.&lt;/p></description></item><item><title>Disabling nvim autoformat on a per-repo basis</title><link>https://marcus.means.no/post/2023-05-17-selective-autoformat-lazyvim/</link><pubDate>Wed, 17 May 2023 00:00:00 +0000</pubDate><author/><guid>https://marcus.means.no/post/2023-05-17-selective-autoformat-lazyvim/</guid><description>&lt;p>I&amp;rsquo;m a huge fan of Folke&amp;rsquo;s Neovim distribution &lt;a href="https://www.lazyvim.org/">lazyvim&lt;/a>. It has replaced my own custom lua config, and
-reduced the time I&amp;rsquo;m spending tweaking my config by a lot.&lt;/p>
+flags or whatever.&lt;/p></description></item><item><title>Disabling nvim autoformat on a per-repo basis</title><link>https://marcus.means.no/post/2023-05-17-selective-autoformat-lazyvim/</link><pubDate>Wed, 17 May 2023 00:00:00 +0000</pubDate><author/><guid>https://marcus.means.no/post/2023-05-17-selective-autoformat-lazyvim/</guid><description>&lt;p>I&amp;rsquo;m a huge fan of Folke&amp;rsquo;s Neovim distribution &lt;a href="https://www.lazyvim.org/">lazyvim&lt;/a>. It has replaced my own custom lua
+config, and reduced the time I&amp;rsquo;m spending tweaking my config by a lot.&lt;/p>
 &lt;p>One nice thing is it enables format on save by default,
 which is actually what I want for almost all things. However in some repos I
 contribute to they frown upon this behavior, so I have to constantly remember
@@ -112,10 +148,10 @@ solution&lt;/a>:&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>})
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Add this to &lt;code>autocmd.lua&lt;/code> and whenever you enter a buffer inside &lt;code>nimdow&lt;/code> or &lt;code>nixpkgs&lt;/code>
 it automatically turns off autoformat. Note how I&amp;rsquo;m expanding ~ in this scenario
-rather than putting in &lt;code>/home/marcus&lt;/code> to ensure it works on MacOs as well as Linux.&lt;/p></description></item><item><title>Enabled comments support with giscus.</title><link>https://marcus.means.no/post/2023-03-20-comments/</link><pubDate>Wed, 22 Mar 2023 00:00:00 +0000</pubDate><author/><guid>https://marcus.means.no/post/2023-03-20-comments/</guid><description>&lt;p>I&amp;rsquo;ve now enabled commments on this site based on &lt;a href="https://giscus.app/">giscus&lt;/a>.&lt;/p>
+rather than putting in &lt;code>/home/marcus&lt;/code> to ensure it works on MacOs as well as Linux.&lt;/p></description></item><item><title>Enabled comments support with giscus.</title><link>https://marcus.means.no/post/2023-03-20-comments/</link><pubDate>Wed, 22 Mar 2023 00:00:00 +0000</pubDate><author/><guid>https://marcus.means.no/post/2023-03-20-comments/</guid><description>&lt;p>I&amp;rsquo;ve now enabled comments on this site based on &lt;a href="https://giscus.app/">giscus&lt;/a>.&lt;/p>
 &lt;h2 id="this-is-an-experiment-and-if-i-drown-in-spam-it-will-go-away-again-">This is an experiment, and if I drown in spam it will go away again. 😅&lt;/h2></description></item><item><title>WorkingCopy adds openai generated commit messages</title><link>https://marcus.means.no/post/2023-03-06-workingcopy-adds-openai-generated-commit-messages/</link><pubDate>Mon, 06 Mar 2023 17:09:38 +0100</pubDate><author/><guid>https://marcus.means.no/post/2023-03-06-workingcopy-adds-openai-generated-commit-messages/</guid><description>&lt;figure>&lt;img src="https://marcus.means.no/images/2023-03-06-WorkingCopy-adds-openai-generated-commit-messages.jpg"
 alt="WorkingCopy adds openai generated commit messages" width="1280"/>
-&lt;/figure></description></item><item><title>Conference report FosDem 2023</title><link>https://marcus.means.no/post/2023-02-07-fosem-2033-conference-report/</link><pubDate>Mon, 06 Feb 2023 14:54:34 +0200</pubDate><author/><guid>https://marcus.means.no/post/2023-02-07-fosem-2033-conference-report/</guid><description>&lt;p>I was really happy to be back in Brussels finally, after some cancelled years due to Covid.
+&lt;/figure></description></item><item><title>Conference report FOSDEM 2023</title><link>https://marcus.means.no/post/2023-02-07-fosdem-2023-conference-report/</link><pubDate>Mon, 06 Feb 2023 14:54:34 +0200</pubDate><author/><guid>https://marcus.means.no/post/2023-02-07-fosdem-2023-conference-report/</guid><description>&lt;p>I was really happy to be back in Brussels finally, after some cancelled years due to Covid.
 The official beer event at Delirium was still cancelled, but a bunch of us still
 gathered there on Friday afternoon. Was great to see old friends from the Open Source
 community, but I still managed to get to the ULB on Saturday morning in time for my first talk.&lt;/p>
@@ -127,7 +163,7 @@ and to be sparing with the official icon set, as they are very sharp. Also a goo
 split up a complicated drawing into two simpler ones.&lt;/p>
 &lt;h3 id="send-in-the-chownss">Send in the chowns()s&lt;/h3>
 &lt;p>This talk was a lot more low level, covering how OpenShift and eventually k8s is adding support
-for virtual uid ranges mapped into the host UIDs through the use of Linux user namespaces.
+for virtual uid ranges mapped into the host user ids through the use of Linux user namespaces.
 This allows things like safely running systemd inside a docker container for legacy apps.
 Hoping I won&amp;rsquo;t need this, but still an interesting talk.&lt;/p>
 &lt;h3 id="dagger-ci-in-go">Dagger CI in Go&lt;/h3>
@@ -143,17 +179,16 @@ and the CI runtime env.&lt;/p>
 for my neovim config. However the most interesting part of the talk was covering the new
 eBPF backend for tracing. It&amp;rsquo;s a lot faster than the existing ptrace backend, and in
 some cases you can go from seconds of overhead to microseconds.&lt;/p>
-&lt;h3 id="tinygoorgbluetooth">Tinygo.org/bluetooth&lt;/h3>
-&lt;p>This was a really funny and interesting talk about using tinygo on embedded devices,
-including lora chipsets for long range communications. They also launched a balloon the
+&lt;h3 id="tinygoorgbluetooth">tinygo.org/bluetooth&lt;/h3>
+&lt;p>This was a really funny and interesting talk about using Tinygo on embedded devices,
+including lora for long range communications. They also launched a balloon the
 day after to demonstrate this. Tinygo def seems like a fun time to try for my next Arduino
 project.&lt;/p>
 &lt;h3 id="bottlerocket">Bottlerocket&lt;/h3>
 &lt;p>Bottlerocket is a container focused os for Kubernetes sponsored by AWS. It&amp;rsquo;s created to have
 fast spin-up time compared to a traditional os like AWS Linux 2, and is def something I would
 look at when setting up an EKS cluster for GitHub Actions. The talk went through some details on
-how well protected the inner core of the os is, as well as strategies for keeping it up to date.
-(updog and more :)&lt;/p>
+how well protected the inner core of the os is, as well as strategies for keeping it up to date.&lt;/p>
 &lt;h3 id="headscale">Headscale&lt;/h3>
 &lt;p>This was my last track of the day in the Go Room. It&amp;rsquo;s about an open source implementation of
 Tailscale coordination/discovery service. Their clients are actually open source, so with this
@@ -161,9 +196,9 @@ in place you can run a fully open source tailnet. Interestingly one of the contr
 is a Norwegian who works for Tailscale in their technical staff, and apparently they fully
 support and collaborate with the Headscale project.&lt;/p>
 &lt;p>The talk also has some interesting points about how they used integration tests to improve their
-compability with the canonical implementation.&lt;/p>
+compatibility with the canonical implementation.&lt;/p>
 &lt;p>This was my last talk of Saturday, and I spent some time attending the various booths around
-the campus, as well as some delicious Beligan brews ;-)&lt;/p>
+the campus, as well as some delicious Belgian brews ;-)&lt;/p>
 &lt;h3 id="honorable-mention-aurae">Honorable Mention: Aurae&lt;/h3>
 &lt;p>I really wanted to see the talk about Aurae in the Rust track (A new distributed pid 1 for
 container runners) but Unfortunately the room was packed. Luckily the recording is already
@@ -175,7 +210,7 @@ on YouTube: &lt;a href="https://www.youtube.com/watch?v=5a277u4j6fU">https://www
 how async vs threads is working in Python, as well as details of the asyncio framework
 included in Python3. In general this is similar to node&amp;rsquo;s promises, but yet slightly
 different. One interesting asyncio function is to_thread() (Added from 3.9+) to run blocking
-workloads as a separate thread in the runloop.&lt;/p>
+workloads as a separate thread in the run-loop.&lt;/p>
 &lt;p>He also recommended looking at FastAPI and Tariflette / Strawberry for async python
 rest / graphql frameworks.&lt;/p>
 &lt;h3 id="accelerating-object-serialization">Accelerating object serialization&lt;/h3>
@@ -184,7 +219,7 @@ mostly about optimizing object serialization and json serialization through low 
 tricks and using the native binary representations, with some serious offsets. Tbh
 it wasn&amp;rsquo;t too interesting to me, seems they should pick better tools for their job.&lt;/p>
 &lt;h3 id="observability-in-postgres">Observability in Postgres&lt;/h3>
-&lt;p>This talk was about using &lt;code>postgres_exporter&lt;/code> to monitor Posgres from Prometheus, which
+&lt;p>This talk was about using &lt;code>postgres_exporter&lt;/code> to monitor Postgres from Prometheus, which
 is something we should probably look into for cloud services as well as our database traffic
 grow. It was also about some future developments of a internal postgres prometheus exporter,
 but this seems rather further away. Likewise it covered some potential support for postgres query
@@ -192,11 +227,11 @@ tracing for opentrace and such.&lt;/p>
 &lt;h3 id="opentelemetry-with-grafana">OpenTelemetry with Grafana&lt;/h3>
 &lt;p>This talk was mostly a nice overview of the main components of the Grafana Observability stack,
 including Loki, Tempo, Mimir and Grafana. Mostly known things to us, but interesting to see
-how things intereacted, showing how you can follow a traceid from loki into tempo for instance
+how things interacted, showing how you can follow a trace-id from Loki into tempo for instance
 It also covered some basic of TraceQL. Held by one of the Grafana Labs Engineering managers,
 and a smooth experience.&lt;/p>
 &lt;h3 id="a-practical-intro-into-opentelemetry">A practical intro into OpenTelemetry&lt;/h3>
-&lt;p>This talk went more into detail about how you can get OpenTelemtry collection by just
+&lt;p>This talk went more into detail about how you can get OpenTelemetry collection by just
 including the Agent for JDK and python services. It also covered some parts of the
 added complexity for envs without a virtual machine like Rust, and mostly the same caveats
 hold through for golang, which means you have to do some work to get the traces.&lt;/p>
@@ -205,8 +240,8 @@ hold through for golang, which means you have to do some work to get the traces.
 so you probably will get a better experience watching the video than I did in that room.
 After a quick intro we went into:&lt;/p>
 &lt;h3 id="nixos-is-great">NixOS is Great&lt;/h3>
-&lt;p>Which was mostly a talk about an ephemeral homelab setup using nixos and pixicores.
-The talk was mostly focused on netbootin diskless machines and didn&amp;rsquo;t really cover
+&lt;p>Which was mostly a talk about an ephemeral home-lab setup using nixOS and &lt;a href="https://github.com/danderson/netboot/tree/main/pixiecore">Pixicore&lt;/a>.
+The talk was mostly focused on netbootin disk-less machines and didn&amp;rsquo;t really cover
 that much nix content.&lt;/p>
 &lt;h3 id="pitfalls-of-nix">Pitfalls of Nix&lt;/h3>
 &lt;p>This talk was about some of the pitfalls of nix and how to avoid them. Unfortunately
@@ -221,11 +256,11 @@ your repo to ensure secrets are kept away from the store.&lt;/p>
 language seems a lot more sense than nix, so they had some
 compelling arguments, but it&amp;rsquo;s still missing flake support, so not quite ready
 for my needs. Will be following nickel-lang/nicker-nix and hoping for quick improvements :)&lt;/p>
-&lt;h3 id="playing-with--nix-in-adverse-hpc">Playing with Nix in adverse HPC&lt;/h3>
+&lt;h3 id="playing-with-nix-in-adverse-hpc">Playing with Nix in adverse HPC&lt;/h3>
 &lt;p>This talk was about university usage of nix in high performance computing. It had
 some interesting ideas like letting nodes share a store with nix_store serve, as well a
-using &lt;code>rpmextract&lt;/code> to repackage rpms into nix. They also wrote a simple nix-wrap script
-to allow sandboxing nix packages. Should be available with the notes on fosdem.org&lt;/p>
+using &lt;code>rpmextract&lt;/code> to repackage rpm into nix. They also wrote a simple nix-wrap script
+to allow sand-boxing nix packages. Should be available with the notes on fosdem.org&lt;/p>
 &lt;h3 id="contracts-for-free">Contracts for free&lt;/h3>
 &lt;p>Another talk about implementing simple type checking for nix. Yants by my friend &lt;a href="https://tazj.in/">tazjin&lt;/a>
 is already prior art here, and it was unclear if contracts adds any significant benefit
@@ -291,12 +326,12 @@ to Tinyproxy in the startup script:&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Now your cloud builder will be able to reach the control plane via the proxy just by setting proxy-url like in my
 first example. The reason this works is that the bastion host resides inside our VPC and thus is available directly
-from our cloud build pool.&lt;/p></description></item><item><title>Enabling touchid for sudo</title><link>https://marcus.means.no/post/2022-03-27-enabling-touchid-for-sudo/</link><pubDate>Sun, 27 Mar 2022 21:31:00 +0200</pubDate><author/><guid>https://marcus.means.no/post/2022-03-27-enabling-touchid-for-sudo/</guid><description>&lt;p>Somehow I missed that this is supported, but it&amp;rsquo;s awesome! Also works with Apple Watch unlock in case your
-mac/keyboard doesn&amp;rsquo;t have a touchid sensor :)&lt;/p></description></item><item><title>Type clipboard with Alfred</title><link>https://marcus.means.no/post/2021-12-09-type-clipboard-with-alfred-/</link><pubDate>Thu, 09 Dec 2021 09:14:37 +0100</pubDate><author/><guid>https://marcus.means.no/post/2021-12-09-type-clipboard-with-alfred-/</guid><description>&lt;p>Ever in a situation where clipboard isn&amp;rsquo;t operational, say inside two layers of vdi for instance? This Alfred workflow
+from our cloud build pool.&lt;/p></description></item><item><title>Enabling touch-id for sudo</title><link>https://marcus.means.no/post/2022-03-27-enabling-touchid-for-sudo/</link><pubDate>Sun, 27 Mar 2022 21:31:00 +0200</pubDate><author/><guid>https://marcus.means.no/post/2022-03-27-enabling-touchid-for-sudo/</guid><description>&lt;p>Somehow I missed that this is supported, but it&amp;rsquo;s awesome! Also works with Apple Watch unlock in case your
+mac/keyboard doesn&amp;rsquo;t have a touch-id sensor :)&lt;/p></description></item><item><title>Type clipboard with Alfred</title><link>https://marcus.means.no/post/2021-12-09-type-clipboard-with-alfred-/</link><pubDate>Thu, 09 Dec 2021 09:14:37 +0100</pubDate><author/><guid>https://marcus.means.no/post/2021-12-09-type-clipboard-with-alfred-/</guid><description>&lt;p>Ever in a situation where clipboard isn&amp;rsquo;t operational, say inside two layers of vdi for instance? This Alfred workflow
 can help!&lt;/p></description></item><item><title>Østensjøvannet</title><link>https://marcus.means.no/post/2021-08-09-%C3%B8stensj%C3%B8vannet/</link><pubDate>Mon, 09 Aug 2021 20:37:08 +0200</pubDate><author/><guid>https://marcus.means.no/post/2021-08-09-%C3%B8stensj%C3%B8vannet/</guid><description>&lt;figure>&lt;img src="https://marcus.means.no/images/2021-08-09-%c3%98stensj%c3%b8vannet.jpg"
 alt="Østensjøvannet" width="1280"/>
 &lt;/figure></description></item><item><title>Started a new Gaming video channel</title><link>https://marcus.means.no/post/2021-02-22-new-gaming-channel/</link><pubDate>Sat, 20 Feb 2021 19:40:00 +0100</pubDate><author/><guid>https://marcus.means.no/post/2021-02-22-new-gaming-channel/</guid><description>&lt;p>First post shows first five minutes of each game in this months Humble Choice
-from Hubmle Bundle, running under Linux.&lt;/p>
+from Humble Bundle, running under Linux.&lt;/p>
 &lt;iframe id="lbry-iframe" width="560" height="315"
 src="https://lbry.tv/$/embed/5min-humble-choice-02-21/89592a7802d3825c3dbb29e8b3a7dd5d8532efc8?r=3cvdSDPFnEF4PTDniNjReLdghFxjkhRJ"
 allowfullscreen>&lt;/iframe>
@@ -304,19 +339,18 @@ allowfullscreen>&lt;/iframe>
 available on &lt;a href="https://www.youtube.com/watch?v=GEaKekwjvCA&amp;amp;feature=youtu.be">Youtube&lt;/a>&lt;/p></description></item><item><title>Zigbee2mqtt</title><link>https://marcus.means.no/post/2021-02-09-zigbee2mqtt/</link><pubDate>Tue, 09 Feb 2021 22:02:41 +0100</pubDate><author/><guid>https://marcus.means.no/post/2021-02-09-zigbee2mqtt/</guid><description>&lt;p>&lt;figure>&lt;img src="https://marcus.means.no/images/2021-02-09-Zigbee2mqtt.jpg"
 alt="Zigbee2mqtt" width="1280"/>
 &lt;/figure>
-Finished migrating all my devices from deconz. Much nicer OTA,binding and entity management. Next up zwave. mqtt all
+Finished migrating all my devices from Deconz. Much nicer OTA, binding and entity management. Next up ZWave. MQTT all
 the things!&lt;/p></description></item><item><title>Sandvika Ice Skaters</title><link>https://marcus.means.no/post/2021-02-01-sandvika-ice-skaters/</link><pubDate>Mon, 01 Feb 2021 00:00:00 +0100</pubDate><author/><guid>https://marcus.means.no/post/2021-02-01-sandvika-ice-skaters/</guid><description>
 &lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
 &lt;iframe src="https://www.youtube.com/embed/Z5IXau-k1oo" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
 &lt;/div>
-&lt;p>I shot this with my Mavic Pro in 4K. Unusual that it&amp;rsquo;s cold enough in Oslo for this to be possible.&lt;/p></description></item><item><title>Homemade chicken nuggets</title><link>https://marcus.means.no/post/2021-01-18-homemade-chicken-nuggets-/</link><pubDate>Mon, 18 Jan 2021 23:41:21 +0100</pubDate><author/><guid>https://marcus.means.no/post/2021-01-18-homemade-chicken-nuggets-/</guid><description>&lt;figure>&lt;img src="https://marcus.means.no/images/2021-01-18-Homemade-chicken-nuggets-.jpg"
+&lt;p>I shot this with my DJI Mavic Pro in 4K. Unusual that it&amp;rsquo;s cold enough in Oslo for this to be possible.&lt;/p></description></item><item><title>Homemade chicken nuggets</title><link>https://marcus.means.no/post/2021-01-18-homemade-chicken-nuggets-/</link><pubDate>Mon, 18 Jan 2021 23:41:21 +0100</pubDate><author/><guid>https://marcus.means.no/post/2021-01-18-homemade-chicken-nuggets-/</guid><description>&lt;figure>&lt;img src="https://marcus.means.no/images/2021-01-18-Homemade-chicken-nuggets-.jpg"
 alt="Homemade chicken nuggets " width="1280"/>
 &lt;/figure></description></item><item><title>Integrating EKS service accounts with AWS IAM</title><link>https://marcus.means.no/post/2021-01-04-integrating-eks-service-accounts-with-aws-iam/</link><pubDate>Mon, 04 Jan 2021 23:38:00 +0100</pubDate><author/><guid>https://marcus.means.no/post/2021-01-04-integrating-eks-service-accounts-with-aws-iam/</guid><description>&lt;p>Been working on setting up a new EKS cluster for work lately, this post shows how to tie together IAM and EKS in a
-nice fashion using Terraform.&lt;/p></description></item><item><title>Giving flickr another go for 2021</title><link>https://marcus.means.no/post/2020-12-27-giving-flickr-another-go-for-2021/</link><pubDate>Sun, 27 Dec 2020 11:33:00 +0100</pubDate><author/><guid>https://marcus.means.no/post/2020-12-27-giving-flickr-another-go-for-2021/</guid><description>&lt;p>I&amp;rsquo;m a bit fed up with every social media site turning into tiktok, so I&amp;rsquo;ve decided to give flickr another go for 2021,
+nice fashion using Terraform.&lt;/p></description></item><item><title>Giving flickr another go for 2021</title><link>https://marcus.means.no/post/2020-12-27-giving-flickr-another-go-for-2021/</link><pubDate>Sun, 27 Dec 2020 11:33:00 +0100</pubDate><author/><guid>https://marcus.means.no/post/2020-12-27-giving-flickr-another-go-for-2021/</guid><description>&lt;p>I&amp;rsquo;m a bit fed up with every social media site turning into TikTok, so I&amp;rsquo;ve decided to give flickr another go for 2021,
 so this is where you&amp;rsquo;ll find my photos for the near future.&lt;/p>
 &lt;a data-flickr-embed="true" href="https://www.flickr.com/photos/marcusramberg/50766117157/in/dateposted-public/"
-title="Merry Christmas 2020">&lt;img src="https://live.staticflickr.com/65535/50766117157_7b74747f29.jpg" width="500"
-height="500" alt="Merry Christmas 2020">&lt;/a>&lt;script async src="//embedr.flickr.com/assets/client-code.js"
-charset="utf-8">&lt;/script></description></item><item><title>Svartdalsparken</title><link>https://marcus.means.no/post/2020-12-21-svartdalsparken/</link><pubDate>Mon, 21 Dec 2020 15:11:46 +0100</pubDate><author/><guid>https://marcus.means.no/post/2020-12-21-svartdalsparken/</guid><description>&lt;figure>&lt;img src="https://marcus.means.no/images/2020-12-21-Svartdalsparken.jpg"
-alt="Svartdalsparken" width="1280"/>
-&lt;/figure></description></item></channel></rss>
+title="Merry Christmas 2020">
+&lt;img src="https://live.staticflickr.com/65535/50766117157_7b74747f29.jpg" width="500"
+height="500" alt="Merry Christmas 2020">&lt;/a>
+&lt;script async src="https://embedr.flickr.com/assets/client-code.js" charset="utf-8">&lt;/script></description></item></channel></rss>

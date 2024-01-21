@@ -7,7 +7,7 @@
 &minus; &#127991;
 <a class=tag href=/tags/command-line>command line</a>
 &#127991;
-<a class=tag href=/tags/css3>css3</a>
+<a class=tag href=/tags/css>css</a>
 &#127991;
 <a class=tag href=/tags/dom>dom</a>
 &#127991;
@@ -15,13 +15,14 @@
 &#127991;
 <a class=tag href=/tags/mojolicious>mojolicious</a>
 &#127991;
-<a class=tag href=/tags/perl>perl</a></span></div></div></div></div></header><article><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p>Mojolicious isn't just useful for perl coders, it also includes a command line tool that can be quite handy for anybody who wants to get info from the web:</p><pre>
+<a class=tag href=/tags/perl>perl</a></span></div></div></div></div></header><article><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p>Mojolicious isn't just useful for perl coders, it also includes a command line
+tool that can be quite handy for anybody who wants to get info from the web:</p><pre>
 usage: /Users/marcus/perl5/perlbrew/perls/perl-5.14.2/bin/mojo get [OPTIONS] \
 URL [SELECTOR] [COMMANDS]
   mojo get /
   mojo get mojolicio.us
   mojo get -v -r google.com
-  mojo get --method POST --content 'trololo' mojolicio.us
+  mojo get --method POST --content 'content' mojolicio.us
   mojo get --header 'X-Bender: Bite my shiny metal ass!' mojolicio.us
   mojo get mojolicio.us 'head &gt; title' text
   mojo get mojolicio.us .footer all
@@ -36,7 +37,12 @@ These options are available:
   --header &lt;name:value&gt;   Additional HTTP header.
   --method &lt;method&gt;       HTTP method to use, defaults to "GET".
   --redirect              Follow up to 5 redirects.
-  --verbose               Print verbose debug information to STDERR.</pre><p>First, the name can be a bit awkward when you use it often. I tend to shorten it to 'mg':</p><pre>    $ alias mg='mojo get'</pre><p>mg is a command line utility similar to curl, but with some really neat tricks up it's sleeve.</p><p>As you can see from the examples above, mg allows you to use familiar CSS selectors to process the response body. This turns out to be very useful. For instance, to get the links to the frontpaged apps on my site <a href=http://iusethis.com/>iusethis.com</a>:<pre>
+  --verbose               Print verbose debug information to STDERR.</pre><p>First, the name can be a bit awkward when you use it often. I tend to shorten
+it to 'mg':</p><pre>    $ alias mg='mojo get'</pre><p>mg is a command line utility similar to curl, but with some really neat tricks
+up it's sleeve.</p><p>As you can see from the examples above, mg allows you to use familiar CSS
+selectors to process the response body. This turns out to be very useful. For
+instance, to get the links to the frontpage apps on my site
+<a href=http://iusethis.com/>iusethis.com</a>:</p><pre>
 $ mg -r iusethis.com 'h2 a' attr href 
 http://osx.iusethis.com/app/corebreach
 http://osx.iusethis.com/app/terraray
@@ -52,13 +58,26 @@ http://osx.iusethis.com/app/iawriter
 &lt;link href="http://osx.iusethis.com/appcast/corebreach" rel="alternate" title="Sparkle AppCast" type="application/rss+xml" /&gt;
 &lt;link href="http://osx.iusethis.com/comment/app.rss/corebreach" rel="alternate" title="Recent Comments" type="application/rss+xml" /&gt;
 &lt;link href="http://osx.iusethis.com/static/opensearch.xml" rel="search" title="iusethis" type="application/opensearchdescription+xml" /&gt;
-</pre><p>Neat, an appcast, let's take a look at the version history:</p><pre> $ mg http://osx.iusethis.com/appcast/corebreach title text
+</pre><p>Neat, an app-cast, let's take a look at the version history:</p><pre>
+ $ mg http://osx.iusethis.com/appcast/corebreach title text
 Appcast for CoreBreach
 CoreBreach 1.1
 CoreBreach 1.0.2
 CoreBreach 1.0.1
 CoreBreach 1.0
-</pre><p>Mojo understands much more complex queries than these tho. Pretty much anything you can use in jQuery or CSS 3 works.<br>A good way to find these defintions is to open up your web page with the Chrome debugger:</p><p><a href=http://osx.iusethis.com/><img src=http://nordaaker.no/docs/skitch/i_use_this_mac_os_x_software__New_Releases-20111130-005241.jpg></a></p><p>Just right-click the element you want to know more about and choose 'Inspect Element' from the menu. This gives you a really simple view of the DOM, which shows you which element on the web page you are highlighting, as well as the parent nodes to your element for use in selectors.</p><p>As for the last argument, you can call anything that you can call on a <a href=http://mojolicio.us/perldoc/Mojo/DOM>Mojo DOM Node</a>.<br>If you exclude it you just get the markup as you saw above.</p><p>Because the client uses the Mojo UserAgent, it already supports features like HTTPS and basic authentication credentials in the URL.<br>mojo get also supports features like doing posts and setting headers, as well as setting the method and the request body, but I think it's this DOM queries that puts it apart from the other HTTP clients like curl, wget or lwp-download. Here's a final trick:</p><p>Set MOJO_USERAGENT_DEBUG=1 in your environment to get full traces of your HTTP requests.</p><p>Like it? Installation is really simple and fast. <a href=http://mojolicio.us>Go get it</a>!</p><script src=https://giscus.app/client.js data-repo=marcusramberg/blog data-repo-id="MDEwOlJlcG9zaXRvcnkyNzAwODc0ODA=" data-category=Announcements data-category-id=DIC_kwDOEBk1OM4CVAZX data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=transparent_dark data-lang=en crossorigin=anonymous async></script></div></div></div></article><hr><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a href=mailto:marcus@means.no><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
+</pre><p>Mojo understands much more complex queries than these tho. Pretty much
+anything you can use in jQuery or CSS 3 works.<br>A good way to find these definitions is to open up your web page with the
+Chrome debugger:</p><p><a href=http://osx.iusethis.com/><img src=http://nordaaker.no/docs/skitch/i_use_this_mac_os_x_software__New_Releases-20111130-005241.jpg></a></p><p>Just right-click the element you want to know more about and choose 'Inspect
+Element' from the menu. This gives you a really simple view of the DOM, which
+shows you which element on the web page you are highlighting, as well as the
+parent nodes to your element for use in selectors.</p><p>As for the last argument, you can call anything that you can call on a
+<a href=http://mojolicio.us/perldoc/Mojo/DOM>Mojo DOM Node</a>.<br>If you exclude it you just get the markup as you saw above.</p><p>Because the client uses the Mojo UserAgent, it already supports features like
+HTTPS and basic authentication credentials in the URL.<br>mojo get also supports features like doing posts and setting headers, as well
+as setting the method and the request body, but I think it's this DOM queries
+that puts it apart from the other HTTP clients like curl, wget or
+lwp-download. Here's a final trick:</p><p>Set MOJO_USERAGENT_DEBUG=1 in your environment to get full traces of your HTTP
+requests.</p><p>Like it? Installation is really simple and fast.
+<a href=http://mojolicio.us>Go get it</a>!</p><script src=https://giscus.app/client.js data-repo=marcusramberg/blog data-repo-id="MDEwOlJlcG9zaXRvcnkyNzAwODc0ODA=" data-category=Announcements data-category-id=DIC_kwDOEBk1OM4CVAZX data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=transparent_dark data-lang=en crossorigin=anonymous async></script></div></div></div></article><hr><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a href=mailto:marcus@means.no><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
 <i class="fa-regular fa-envelope fa-stack-1x fa-inverse"></i></span></a></li><li><a rel=me href=https://hachyderm.io/@marcus><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
 <i class="fa-brands fa-mastodon fa-stack-1x fa-inverse"></i></span></a></li><li><a rel=me href=https://github.com/marcusramberg><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
 <i class="fa-brands fa-github fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="copyright text-muted"><a href=https://github.com/marcusramberg/blog/>Code released under the MIT license.</a></p></div></div></div></footer><script src=https://marcus.means.no//js/jquery.min.js></script>

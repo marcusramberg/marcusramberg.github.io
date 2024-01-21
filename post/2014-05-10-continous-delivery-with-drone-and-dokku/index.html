@@ -1,9 +1,9 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Making (things|code|mischief|mistakes)."><meta name=author content="Marcus Ramberg"><meta name=generator content="Hugo 0.111.3"><title>Continous Delivery with Drone and Dokku -- marcus</title><link href=https://marcus.means.no//css/bootstrap.min.css rel=stylesheet><link href=https://marcus.means.no//css/clean-blog.min.css rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel=stylesheet type=text/css><link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel=stylesheet type=text/css><meta property="og:title" content="Continous Delivery with Drone and Dokku"><meta property="og:url" content="https://marcus.means.no//"><meta property="og:image" content="https://marcus.means.no//"></head><body><nav class="navbar navbar-default navbar-custom navbar-fixed-top"><div class=container-fluid><div class="navbar-header page-scroll"><button type=button class=navbar-toggle data-toggle=collapse data-target=#bs-example-navbar-collapse-1>
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Making (things|code|mischief|mistakes)."><meta name=author content="Marcus Ramberg"><meta name=generator content="Hugo 0.111.3"><title>Continuous Delivery with Drone and Dokku -- marcus</title><link href=https://marcus.means.no//css/bootstrap.min.css rel=stylesheet><link href=https://marcus.means.no//css/clean-blog.min.css rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel=stylesheet type=text/css><link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel=stylesheet type=text/css><meta property="og:title" content="Continuous Delivery with Drone and Dokku"><meta property="og:url" content="https://marcus.means.no//"><meta property="og:image" content="https://marcus.means.no//"></head><body><nav class="navbar navbar-default navbar-custom navbar-fixed-top"><div class=container-fluid><div class="navbar-header page-scroll"><button type=button class=navbar-toggle data-toggle=collapse data-target=#bs-example-navbar-collapse-1>
 <span class=sr-only>Toggle navigation</span>
 <span class=icon-bar></span>
 <span class=icon-bar></span>
 <span class=icon-bar></span></button>
-<a class=navbar-brand href=https://marcus.means.no/>marcus</a></div><div class="collapse navbar-collapse" id=bs-example-navbar-collapse-1><ul class="nav navbar-nav navbar-right"><li><a href=/>Home</a></li><li><a href=/tags/>Tags</a></li><li><a href=/post/>Archives</a></li></ul></div></div></nav><header class=intro-header style="background-image:linear-gradient( rgba(0,0,0,.5),rgba(0,0,0,.5) ),url(https://marcus.means.no//img/post-bg.jpg)"><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><h1>Continous Delivery with Drone and Dokku</h1><h2 class=subheading></h2><span class=meta><small>2014-05-10</small>
+<a class=navbar-brand href=https://marcus.means.no/>marcus</a></div><div class="collapse navbar-collapse" id=bs-example-navbar-collapse-1><ul class="nav navbar-nav navbar-right"><li><a href=/>Home</a></li><li><a href=/tags/>Tags</a></li><li><a href=/post/>Archives</a></li></ul></div></div></nav><header class=intro-header style="background-image:linear-gradient( rgba(0,0,0,.5),rgba(0,0,0,.5) ),url(https://marcus.means.no//img/post-bg.jpg)"><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><h1>Continuous Delivery with Drone and Dokku</h1><h2 class=subheading></h2><span class=meta><small>2014-05-10</small>
 &minus; &#127991;
 <a class=tag href=/tags/docker>docker</a>
 &#127991;
@@ -21,11 +21,11 @@ However, there are always complications. Hard to install dependencies, Selenium
 tests, required infrastructure services. That is why I have grown to love
 <a href=http://github.com/drone/drone>Drone</a>. Run your test suite in a clean docker
 image every time, cache your dependencies (just like Heroku does), and run a
-deploy action of your choice if the test succed. Drone also supports various
+deploy action of your choice if the test succeed. Drone also supports various
 notification mechanisms, including Email (of course), IM and our favorite
 Slack.</p><p>It also has support for a host of linked services, including PostgreSQL, MySQL,
 MongoDB and Redis, but writing your own is also easy if needed. I&rsquo;ve added
-support to Beanstalkd for us, and plan to contribute this back soon.</p><p>To make this even sweeter, I&rsquo;ve coupled Drone with
+support to Beanstalk for us, and plan to contribute this back soon.</p><p>To make this even sweeter, I&rsquo;ve coupled Drone with
 <a href=http://dokkuapp.com/>Dokku</a>, a simple Heroku like PAAS built on top of
 Docker. We follow the <a href=http://scottchacon.com/2011/08/31/github-flow.html>Github
 flow</a>, and this setup
@@ -65,11 +65,11 @@ respective projects, so I won&rsquo;t cover that here. However, here is the
 </span></span><span style=display:flex><span>  <span style=color:#f92672>bash</span>:
 </span></span><span style=display:flex><span>    <span style=color:#f92672>script</span>:
 </span></span><span style=display:flex><span>  - <span style=color:#e6db74>&#39;perl deploy.pl&#39;</span>
-</span></span></code></pre></div><p>Let&rsquo;s go through it quickly; The backend is built on Padrino, and we run it
+</span></span></code></pre></div><p>Let&rsquo;s go through it quickly; The back-end is built on Padrino, and we run it
 using the most recent ruby image. The cache setting is to avoid having to
-reinstall all the rubygems on every test run, and then we setup ENV for the
-Database connection as well as setting padrino in test mode, and the X11
-display for integration tests.</p><p>Then we configure two services to be used; the built in postgres service, and
+reinstall all the ruby gems on every test run, and then we setup ENV for the
+Database connection as well as setting Padrino in test mode, and the X11
+display for integration tests.</p><p>Then we configure two services to be used; the built in Postgres service, and
 the
 beanstalkd service we built. We also set up notifications for every event to the excellent
 <a href=http://slack.com>Slack</a>.</p><p>Next comes the test script. These are just run in sequence we setup bundler
