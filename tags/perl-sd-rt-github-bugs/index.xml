@@ -1,1 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>perl sd rt github bugs on marcus</title><link>https://marcus.means.no/tags/perl-sd-rt-github-bugs/</link><description>Recent content in perl sd rt github bugs on marcus</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Thu, 27 Aug 2009 00:00:00 +0000</lastBuildDate><atom:link href="https://marcus.means.no/tags/perl-sd-rt-github-bugs/index.xml" rel="self" type="application/rss+xml"/><item><title>SD available for general use</title><link>https://marcus.means.no/post/2009-08-27-sd-available-for-general-use/</link><pubDate>Thu, 27 Aug 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-08-27-sd-available-for-general-use/</guid><description>Jesse Vincent of RT and Hiveminder fame has just announced that his new system SD is available for public use. SD (Simple Defects) is a peer-to-peer issue tracking system built on top of Prophet. In addition to being a full-fledged distributed bug tracker, SD can also bidirectionally sync with your RT, Hiveminder, Trac, GitHub or Google Code issue tracker. You can install SD with the CPAN shell by doing</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Perl Sd Rt Github Bugs on marcus</title><link>https://marcus.means.no/tags/perl-sd-rt-github-bugs/</link><description>Recent content in Perl Sd Rt Github Bugs on marcus</description><generator>Hugo</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Thu, 06 Feb 2025 20:57:08 +0100</lastBuildDate><atom:link href="https://marcus.means.no/tags/perl-sd-rt-github-bugs/index.xml" rel="self" type="application/rss+xml"/><item><title>SD available for general use</title><link>https://marcus.means.no/post/2009-08-27-sd-available-for-general-use/</link><pubDate>Thu, 27 Aug 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-08-27-sd-available-for-general-use/</guid><description>&lt;p>
+ Jesse Vincent of RT and Hiveminder fame has just announced that his new system
+ SD is available for public use.
+&lt;/p>
+&lt;blockquote>
+ &lt;p>
+ SD (Simple Defects) is a peer-to-peer issue tracking system built on top of
+ Prophet. In addition to being a full-fledged distributed bug tracker, SD can
+ also bidirectionally sync with your RT, Hiveminder, Trac, GitHub or Google
+ Code issue tracker.
+ &lt;/p>
+&lt;/blockquote>
+&lt;p>You can install SD with the CPAN shell by doing&lt;/p>
+&lt;pre>$ cpan App::SD&lt;/pre>
+&lt;p>
+ For more info, read the
+ &lt;a
+ href="http://blog.bestpractical.com/2009/08/prophet-and-sd-07-cavil-are-now-available.html"
+ >release announcement&lt;/a
+ >.
+&lt;/p></description></item></channel></rss>

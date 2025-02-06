@@ -1,1 +1,31 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>gc on marcus</title><link>https://marcus.means.no/tags/gc/</link><description>Recent content in gc on marcus</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Thu, 13 Sep 2012 00:00:00 +0000</lastBuildDate><atom:link href="https://marcus.means.no/tags/gc/index.xml" rel="self" type="application/rss+xml"/><item><title>Perl needs modern garbage collection</title><link>https://marcus.means.no/post/2012-09-13-perl-needs-modern-garbage-collection/</link><pubDate>Thu, 13 Sep 2012 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2012-09-13-perl-needs-modern-garbage-collection/</guid><description>Chromatic just wrote a list of important features that Perl 5 needs. While I agree with most of the listed ones (and in fact contributed to the new p5-mop proposal during the recent Hackathon), I found one feature curiously missing. I mean, JWZ pointed this out in 1998; Perl garbage collection is a bad joke. That was 14 years ago, and the situation is the same. It is trivial to create a circular reference and trip it up.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gc on marcus</title><link>https://marcus.means.no/tags/gc/</link><description>Recent content in Gc on marcus</description><generator>Hugo</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Thu, 06 Feb 2025 20:57:08 +0100</lastBuildDate><atom:link href="https://marcus.means.no/tags/gc/index.xml" rel="self" type="application/rss+xml"/><item><title>Perl needs modern garbage collection</title><link>https://marcus.means.no/post/2012-09-13-perl-needs-modern-garbage-collection/</link><pubDate>Thu, 13 Sep 2012 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2012-09-13-perl-needs-modern-garbage-collection/</guid><description>&lt;p>
+ Chromatic just wrote a list of
+ &lt;a
+ href="http://www.modernperlbooks.com/mt/2012/09/features-perl-5-needs-in-2012.html"
+ >important features that Perl 5 needs&lt;/a
+ >. While I agree with most of the listed ones (and in fact
+ &lt;a href="http://marcus.nordaaker.com/moving-to-moose-hackathon-2013/"
+ >contributed to the new p5-mop&lt;/a
+ >
+ proposal during the recent Hackathon), I found one feature curiously missing.
+&lt;/p>
+&lt;div>&lt;/div>
+&lt;div>
+ I mean, JWZ pointed this out in 1998;
+ &lt;a href="http://www.jwz.org/doc/gc.html"
+ >Perl garbage collection is a bad joke&lt;/a
+ >. That was 14 years ago, and the situation is the same. It is trivial to
+ create a circular reference and trip it up. Especially when you are doing
+ event-driven code where callbacks are common, it is quite easy to close over
+ some variable and create a leak. Languages like C#, Ruby and Java has this
+ sorted already with variants of mark and sweep-based systems, Python has built
+ in cycle detectors in their ref count implementation, and even Objective-C
+ manages to detect cycles fairly well with their new compile-time automated
+ reference counting.&amp;nbsp;
+&lt;/div>
+&lt;div>&lt;/div>
+&lt;div>&lt;/div>
+&lt;div>
+ Don't worry so much about adding sugar to the syntax. This is a feature Perl
+ really needs.&amp;nbsp;
+&lt;/div></description></item></channel></rss>

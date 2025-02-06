@@ -1,1 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>varnish on marcus</title><link>https://marcus.means.no/tags/varnish/</link><description>Recent content in varnish on marcus</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Wed, 27 May 2009 00:00:00 +0000</lastBuildDate><atom:link href="https://marcus.means.no/tags/varnish/index.xml" rel="self" type="application/rss+xml"/><item><title>Tactical overview of your varnish instances</title><link>https://marcus.means.no/post/2009-05-27-tactical-overview-of-your-varnish-instances/</link><pubDate>Wed, 27 May 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-05-27-tactical-overview-of-your-varnish-instances/</guid><description>varnish-top is a handy util for keeping track of our varnish installation (via Denis). From the google-code project page page: Simply, it is a tool that lets you monitor a few key stats from one or more varnish boxes in real-time, from the command line, in a top-like screen. It's not the most sophisticated tool, but is handy for seeing a real-time view into how your box(es) are doing without needing to set up graphing, open up a browser, etc.</description></item><item><title>Handy varnish tips</title><link>https://marcus.means.no/post/2009-05-25-handy-varnish-tips/</link><pubDate>Mon, 25 May 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-05-25-handy-varnish-tips/</guid><description>We depend heavily on the varnish cache to run iusethis and our other sites. These tips from Kristian@linpro are a must read: ESI is cool. And requires more session workspace. If you don’t increase the value of sess_workspace (default: 16kb. Advised value: 32kb or more), you are likely to see assert errors in your syslog. (Hint: If you are going wtf is ESI, you really want to find out more :)</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Varnish on marcus</title><link>https://marcus.means.no/tags/varnish/</link><description>Recent content in Varnish on marcus</description><generator>Hugo</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Thu, 06 Feb 2025 20:57:08 +0100</lastBuildDate><atom:link href="https://marcus.means.no/tags/varnish/index.xml" rel="self" type="application/rss+xml"/><item><title>Tactical overview of your varnish instances</title><link>https://marcus.means.no/post/2009-05-27-tactical-overview-of-your-varnish-instances/</link><pubDate>Wed, 27 May 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-05-27-tactical-overview-of-your-varnish-instances/</guid><description>&lt;p>
+ &lt;a href="http://code.google.com/p/varnish-top/">varnish-top&lt;/a> is a handy
+ util for keeping track of our varnish installation (via
+ &lt;a href="http://del.icio.us/denisb">Denis&lt;/a>). From the google-code project
+ page page:
+&lt;/p>
+&lt;blockquote>
+ &lt;p>
+ Simply, it is a tool that lets you monitor a few key stats from one or more
+ varnish boxes in real-time, from the command line, in a top-like screen.
+ It's not the most sophisticated tool, but is handy for seeing a real-time
+ view into how your box(es) are doing without needing to set up graphing,
+ open up a browser, etc.
+ &lt;/p></description></item><item><title>Handy varnish tips</title><link>https://marcus.means.no/post/2009-05-25-handy-varnish-tips/</link><pubDate>Mon, 25 May 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-05-25-handy-varnish-tips/</guid><description>&lt;p>
+ We depend heavily on the varnish cache to run iusethis and our other sites.
+ These tips from Kristian@linpro are a must read:
+&lt;/p>
+&lt;blockquote>
+ &lt;p>
+ ESI is cool. And requires more session workspace. If you don’t increase the
+ value of sess_workspace (default: 16kb. Advised value: 32kb or more), you
+ are likely to see assert errors in your syslog.
+ &lt;/p>
+&lt;/blockquote>
+&lt;p>(Hint: If you are going wtf is ESI, you really want to find out more :)&lt;/p></description></item></channel></rss>

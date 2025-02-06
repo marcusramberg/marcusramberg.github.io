@@ -1,1 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Freebsd on marcus</title><link>https://marcus.means.no/tags/freebsd/</link><description>Recent content in Freebsd on marcus</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Mon, 30 Mar 2009 00:00:00 +0000</lastBuildDate><atom:link href="https://marcus.means.no/tags/freebsd/index.xml" rel="self" type="application/rss+xml"/><item><title>MojoMojo now in FreeBSD ports.</title><link>https://marcus.means.no/post/2009-03-30-mojomojo-now-in-freebsd-ports/</link><pubDate>Mon, 30 Mar 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-03-30-mojomojo-now-in-freebsd-ports/</guid><description>After MojoMojo, the CMS/Wiki software that powers dev.catalyst.perl.org was featured prominently in the CPANTS Heavy 100, there was some concern about how much time was required to install it. However, thanks to the illustrious dane Lars Balker Rasmussen, FreeBSD guys now have it easy. He's fought through our entire dependency list, and uploaded p5-MojoMojo to the FreeBSD ports tree. Hopefully Debian packages won't be far behind. (In the interest of full disclosure, I am the founder of the MojoMojo project.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Freebsd on marcus</title><link>https://marcus.means.no/tags/freebsd/</link><description>Recent content in Freebsd on marcus</description><generator>Hugo</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Thu, 06 Feb 2025 20:57:08 +0100</lastBuildDate><atom:link href="https://marcus.means.no/tags/freebsd/index.xml" rel="self" type="application/rss+xml"/><item><title>MojoMojo now in FreeBSD ports.</title><link>https://marcus.means.no/post/2009-03-30-mojomojo-now-in-freebsd-ports/</link><pubDate>Mon, 30 Mar 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-03-30-mojomojo-now-in-freebsd-ports/</guid><description>&lt;p>
+ After &lt;a href="http://www.mojomojo.org/">MojoMojo&lt;/a>, the CMS/Wiki software
+ that powers
+ &lt;a href="http://dev.catalyst.perl.org">dev.catalyst.perl.org&lt;/a> was featured
+ prominently in the
+ &lt;a href="http://use.perl.org/comments.pl?sid=42312&amp;cid=67298"
+ >CPANTS Heavy 100&lt;/a
+ >, there was some concern about how much time was required to install it.
+ However, thanks to the illustrious dane Lars Balker Rasmussen, FreeBSD guys
+ now have it easy. He's fought through our entire dependency list, and uploaded
+ &lt;a href="http://www.freshports.org/www/p5-MojoMojo/">p5-MojoMojo&lt;/a> to the
+ FreeBSD ports tree. Hopefully Debian packages won't be far behind.
+&lt;/p>
+&lt;p>
+ (In the interest of full disclosure, I am the founder of the MojoMojo project.
+ To contact us, you can use
+ &lt;a href="http://lists.scsys.co.uk/mailman/listinfo/">our mailing list&lt;/a>, or
+ come by the &lt;a href="irc://irc.perl.org/#mojomojo">IRC channel&lt;/a>)
+&lt;/p></description></item></channel></rss>

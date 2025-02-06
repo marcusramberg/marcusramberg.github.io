@@ -1,1 +1,31 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>css on marcus</title><link>https://marcus.means.no/tags/css/</link><description>Recent content in css on marcus</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Wed, 30 Nov 2011 00:00:00 +0000</lastBuildDate><atom:link href="https://marcus.means.no/tags/css/index.xml" rel="self" type="application/rss+xml"/><item><title>$ mojo get is X-ray for the web</title><link>https://marcus.means.no/post/2011-11-30-mojo-get-is-x-ray-for-the-web/</link><pubDate>Wed, 30 Nov 2011 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2011-11-30-mojo-get-is-x-ray-for-the-web/</guid><description>Mojolicious isn't just useful for perl coders, it also includes a command line tool that can be quite handy for anybody who wants to get info from the web: usage: /Users/marcus/perl5/perlbrew/perls/perl-5.14.2/bin/mojo get [OPTIONS] \ URL [SELECTOR] [COMMANDS] mojo get / mojo get mojolicio.us mojo get -v -r google.com mojo get --method POST --content 'content' mojolicio.us mojo get --header 'X-Bender: Bite my shiny metal ass!' mojolicio.us mojo get mojolicio.us 'head &amp;gt; title' text mojo get mojolicio.</description></item><item><title>Pure CSS Fail Whale</title><link>https://marcus.means.no/post/2010-06-17-pure-css-fail-whale/</link><pubDate>Thu, 17 Jun 2010 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2010-06-17-pure-css-fail-whale/</guid><description>Really impressive. When will we see pure CSS animated ads start appearing?</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CSS on marcus</title><link>https://marcus.means.no/tags/css/</link><description>Recent content in CSS on marcus</description><generator>Hugo</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Thu, 06 Feb 2025 20:57:08 +0100</lastBuildDate><atom:link href="https://marcus.means.no/tags/css/index.xml" rel="self" type="application/rss+xml"/><item><title>$ mojo get is X-ray for the web</title><link>https://marcus.means.no/post/2011-11-30-mojo-get-is-x-ray-for-the-web/</link><pubDate>Wed, 30 Nov 2011 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2011-11-30-mojo-get-is-x-ray-for-the-web/</guid><description>&lt;p>
+ Mojolicious isn't just useful for perl coders, it also includes a command line
+ tool that can be quite handy for anybody who wants to get info from the web:
+&lt;/p>
+&lt;pre>
+usage: /Users/marcus/perl5/perlbrew/perls/perl-5.14.2/bin/mojo get [OPTIONS] \
+URL [SELECTOR] [COMMANDS]
+ mojo get /
+ mojo get mojolicio.us
+ mojo get -v -r google.com
+ mojo get --method POST --content 'content' mojolicio.us
+ mojo get --header 'X-Bender: Bite my shiny metal ass!' mojolicio.us
+ mojo get mojolicio.us 'head &amp;gt; title' text
+ mojo get mojolicio.us .footer all
+ mojo get mojolicio.us a attr href
+ mojo get mojolicio.us '*' attr id
+ mojo get mojolicio.us 'h1, h2, h3' 3 text
+
+These options are available:
+ --charset &amp;lt;charset&amp;gt; Charset of HTML5/XML content, defaults to auto
+ detection or "UTF-8".
+ --content &amp;lt;content&amp;gt; Content to send with request.
+ --header &amp;lt;name:value&amp;gt; Additional HTTP header.
+ --method &amp;lt;method&amp;gt; HTTP method to use, defaults to "GET".
+ --redirect Follow up to 5 redirects.
+ --verbose Print verbose debug information to STDERR.&lt;/pre
+>
+&lt;p>
+ First, the name can be a bit awkward when you use it often. I tend to shorten
+ it to 'mg':
+&lt;/p></description></item><item><title>Pure CSS Fail Whale</title><link>https://marcus.means.no/post/2010-06-17-pure-css-fail-whale/</link><pubDate>Thu, 17 Jun 2010 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2010-06-17-pure-css-fail-whale/</guid><description>&lt;p>Really impressive. When will we see pure CSS animated ads start appearing?&lt;/p></description></item></channel></rss>

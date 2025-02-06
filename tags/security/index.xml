@@ -1,6 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>security on marcus</title><link>https://marcus.means.no/tags/security/</link><description>Recent content in security on marcus</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Wed, 04 Mar 2009 00:00:00 +0000</lastBuildDate><atom:link href="https://marcus.means.no/tags/security/index.xml" rel="self" type="application/rss+xml"/><item><title>Big oops for Spotify?</title><link>https://marcus.means.no/post/2009-03-04-big-oops-for-spotify/</link><pubDate>Wed, 04 Mar 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-03-04-big-oops-for-spotify/</guid><description>I just received a mail from Spotify about a security issue:
-Along with passwords, registration information such as your email
-address,birth date, gender, postal code and billing receipt
-details were potentially exposed. Credit card numbers are not
-stored by us and were not at risk. All payment data is handled
-by a secure 3rd party provider. Oh well. At least they hashed our passwords and secured the credit card transactions.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Security on marcus</title><link>https://marcus.means.no/tags/security/</link><description>Recent content in Security on marcus</description><generator>Hugo</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Thu, 06 Feb 2025 20:57:08 +0100</lastBuildDate><atom:link href="https://marcus.means.no/tags/security/index.xml" rel="self" type="application/rss+xml"/><item><title>Big oops for Spotify?</title><link>https://marcus.means.no/post/2009-03-04-big-oops-for-spotify/</link><pubDate>Wed, 04 Mar 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-03-04-big-oops-for-spotify/</guid><description>&lt;p>I just received a mail from Spotify about a security issue:&lt;/p>
+&lt;blockquote>
+ &lt;p>
+ Along with passwords, registration information such as your email&lt;br />
+ address,birth date, gender, postal code and billing receipt&lt;br />
+ details were potentially exposed. Credit card numbers are not&lt;br />
+ stored by us and were not at risk. All payment data is handled&lt;br />
+ by a secure 3rd party provider.
+ &lt;/p>
+&lt;/blockquote>
+&lt;p>
+ Oh well. At least they hashed our passwords and secured the credit card
+ transactions. All in all, I think they've handled themselves very well. Kudos
+ for being so up front about this as well.
+&lt;/p></description></item></channel></rss>

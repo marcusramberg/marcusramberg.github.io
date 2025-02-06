@@ -1,1 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>model dbix::class on marcus</title><link>https://marcus.means.no/tags/model-dbixclass/</link><description>Recent content in model dbix::class on marcus</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Fri, 07 Aug 2009 00:00:00 +0000</lastBuildDate><atom:link href="https://marcus.means.no/tags/model-dbixclass/index.xml" rel="self" type="application/rss+xml"/><item><title>Model adaptors for Catalyst.</title><link>https://marcus.means.no/post/2009-08-07-model-adaptors-for-catalyst/</link><pubDate>Fri, 07 Aug 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-08-07-model-adaptors-for-catalyst/</guid><description>In a recent post Dave Rolsky points out some of his own best practices for Catalyst. While I've come around to agree with his first point, that Catalyst should generate a reusable config class for the user, I'm not so sure with regards to his model viewpoints. For me, the strength of Catalyst's Model layer has always been the immense glue layer that allows me to configure any model in a predictable way.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Model Dbix::class on marcus</title><link>https://marcus.means.no/tags/model-dbixclass/</link><description>Recent content in Model Dbix::class on marcus</description><generator>Hugo</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Thu, 06 Feb 2025 20:57:08 +0100</lastBuildDate><atom:link href="https://marcus.means.no/tags/model-dbixclass/index.xml" rel="self" type="application/rss+xml"/><item><title>Model adaptors for Catalyst.</title><link>https://marcus.means.no/post/2009-08-07-model-adaptors-for-catalyst/</link><pubDate>Fri, 07 Aug 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-08-07-model-adaptors-for-catalyst/</guid><description>&lt;p>
+ In a
+ &lt;a href="http://blog.urth.org/2009/08/how-i-use-catalyst.html">recent post&lt;/a>
+ Dave Rolsky points out some of his own best practices for Catalyst. While I've
+ come around to agree with his first point, that Catalyst should generate a
+ reusable config class for the user, I'm not so sure with regards to his model
+ viewpoints.
+&lt;/p>
+&lt;p>
+ For me, the strength of Catalyst's Model layer has always been the immense
+ glue layer that allows me to configure any model in a predictable way. Much
+ like DBI gives me a unified way to talk to databases, the Catalyst model-layer
+ gives us a unified way of configuring models. In addition, we are able to
+ provide helpers to create these models from the command line, reducing the
+ work needed to set up a new model.
+&lt;/p></description></item></channel></rss>

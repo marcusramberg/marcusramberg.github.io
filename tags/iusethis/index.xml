@@ -1,3 +1,48 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>iusethis on marcus</title><link>https://marcus.means.no/tags/iusethis/</link><description>Recent content in iusethis on marcus</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Tue, 22 Jun 2010 00:00:00 +0000</lastBuildDate><atom:link href="https://marcus.means.no/tags/iusethis/index.xml" rel="self" type="application/rss+xml"/><item><title>i use this, now 50% more social.</title><link>https://marcus.means.no/post/2010-06-22-i-use-this-now-with-50-more-social/</link><pubDate>Tue, 22 Jun 2010 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2010-06-22-i-use-this-now-with-50-more-social/</guid><description>We've just pushed a major update to iusethis, adding several social features and updating the commenting system with support for replies. To improve performance, we've also added a new caching system, to allow us to cache more data for logged-in users. Find your friends Looking up your contacts in GMail is a feature that we've wanted for a long time, but we did not want to compromise users by asking for their passwords.</description></item><item><title>Quicksilver plugin for iusethis.com</title><link>https://marcus.means.no/post/2009-05-15-quicksilver-plugin-for-iusethiscom/</link><pubDate>Fri, 15 May 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-05-15-quicksilver-plugin-for-iusethiscom/</guid><description>Quicksilver is one tool I can't live without. When I use a Mac without it, I feel handicapped. I've been doing some iPhone development lately, and I am feel comfortable with Objective-C. Yesterday I decided to write a Quicksilver plugin. This tutorial series made it easy. I have made a video using Snapz Pro to show how it works:
-You can download it right now and try it out. Like other utilities we make for iusethis, it's free and open source (Artistic/GPL dual licensed).</description></item><item><title>The Hunt For The Apple Store Associates Program</title><link>https://marcus.means.no/post/2009-03-06-the-hunt-for-the-apple-store-associates-program/</link><pubDate>Fri, 06 Mar 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-03-06-the-hunt-for-the-apple-store-associates-program/</guid><description>As you might know, we run a software site for mac users, i use this. The site is free to use, and we finance it through the use of advertisement. Mostly we get advertisement from the Google ads program, as well as indie shareware developers, and on occasion promotional programs like Mac Heist.
-I figure Apple Products would be a good fit for our users, so I was pleased when a quick Google Search turned up the Apple Store Associates Program.</description></item><item><title>Painless roll-outs with FCGI::Engine</title><link>https://marcus.means.no/post/2009-02-24-painless-rollouts-with-fcgiengine/</link><pubDate>Tue, 24 Feb 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-02-24-painless-rollouts-with-fcgiengine/</guid><description>Our software site i use this is built on the MVC Framework Catalyst. We currently run it using the Russian web server Nginx and standalone fastcgi servers. I am using the Moose based CGI::Engine distribution by Stevan Little to start the servers. This module makes it really easy to manage your applications. You just create a YML config file like this: --- - name: "iusethis-osx.server" nproc: 4 scriptname: "/www/iusethis-osx/script/iusethis_fastcgi.pl" pidfile: "</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Iusethis on marcus</title><link>https://marcus.means.no/tags/iusethis/</link><description>Recent content in Iusethis on marcus</description><generator>Hugo</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Thu, 06 Feb 2025 20:57:08 +0100</lastBuildDate><atom:link href="https://marcus.means.no/tags/iusethis/index.xml" rel="self" type="application/rss+xml"/><item><title>i use this, now 50% more social.</title><link>https://marcus.means.no/post/2010-06-22-i-use-this-now-with-50-more-social/</link><pubDate>Tue, 22 Jun 2010 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2010-06-22-i-use-this-now-with-50-more-social/</guid><description>&lt;p>
+ We've just pushed a major update to iusethis, adding several social features
+ and updating the commenting system with support for replies. To improve
+ performance, we've also added a new caching system, to allow us to cache more
+ data for logged-in users.
+&lt;/p>
+&lt;h2>Find your friends&lt;/h2>
+&lt;p>
+ Looking up your contacts in GMail is a feature that we've wanted for a long
+ time, but we did not want to compromise users by asking for their passwords.
+ Now that Google supports OAuth we were able to implement it the way we wanted.
+ In order to use it, go to your profile and click the 'more' link on the
+ 'friends' sidebar:
+&lt;/p></description></item><item><title>Quicksilver plugin for iusethis.com</title><link>https://marcus.means.no/post/2009-05-15-quicksilver-plugin-for-iusethiscom/</link><pubDate>Fri, 15 May 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-05-15-quicksilver-plugin-for-iusethiscom/</guid><description>&lt;p>&lt;a href="http://osx.iusethis.com/app/quicksilver">Quicksilver&lt;/a> is one tool I can't live without. When I use a Mac without it, I feel handicapped. I've been doing some iPhone development lately, and I am feel comfortable with Objective-C. Yesterday I decided to write a Quicksilver plugin. &lt;a href="http://lipidity.com/apple/quicksilver-plugins-in-objective-c/">This tutorial series&lt;/a> made it easy. I have made a video using &lt;a href="http://osx.iusethis.com/app/snapzprox">Snapz Pro&lt;/a> to show how it works:&lt;/p>
+&lt;p>&lt;object width="400" height="300">&lt;param name="allowfullscreen" value="true" />&lt;param name="allowscriptaccess" value="always" />&lt;param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=4662293&amp;amp;server=vimeo.com&amp;amp;show_title=1&amp;amp;show_byline=1&amp;amp;show_portrait=0&amp;amp;color=&amp;amp;fullscreen=1" />&lt;embed src="http://vimeo.com/moogaloop.swf?clip_id=4662293&amp;amp;server=vimeo.com&amp;amp;show_title=1&amp;amp;show_byline=1&amp;amp;show_portrait=0&amp;amp;color=&amp;amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="400" height="300">&lt;/embed>&lt;/object>&lt;/p>
+&lt;p>You can &lt;a href="http://dev.thefeed.no/stuff/iusethis-qsplugin.zip">download it right now&lt;/a> and try it out. Like other utilities we make for &lt;a href="http://iusethis.com/">iusethis&lt;/a>, it's free and open source (Artistic/GPL dual licensed). Check out the &lt;a href="http://github.com/marcusramberg/iusethis-utils/tree/9b4510f7ba1dac004846e95c9816b66693325828/iusethis-quicksilver-plugin#">source&lt;/a> from &lt;a href="http://github.com/">Github&lt;/a>.&lt;/p></description></item><item><title>The Hunt For The Apple Store Associates Program</title><link>https://marcus.means.no/post/2009-03-06-the-hunt-for-the-apple-store-associates-program/</link><pubDate>Fri, 06 Mar 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-03-06-the-hunt-for-the-apple-store-associates-program/</guid><description>&lt;p>As you might know, we run a software site for mac users, &lt;a href="http://iusethis.com/">i use this&lt;/a>. The site is free to use, and we finance it through the use of advertisement. Mostly we get advertisement from the Google ads program, as well as indie shareware developers, and on occasion promotional programs like &lt;a href="http://macheist.net/">Mac Heist&lt;/a>.&lt;/p>
+&lt;p>I figure Apple Products would be a good fit for our users, so I was pleased when a quick Google Search turned up the &lt;a href="http://www.apple.com/storeassociates/">Apple Store Associates Program&lt;/a>. &lt;/p></description></item><item><title>Painless roll-outs with FCGI::Engine</title><link>https://marcus.means.no/post/2009-02-24-painless-rollouts-with-fcgiengine/</link><pubDate>Tue, 24 Feb 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-02-24-painless-rollouts-with-fcgiengine/</guid><description>&lt;p>
+ Our software site &lt;a href="http://iusethis.com/">i use this&lt;/a> is built on
+ the MVC Framework &lt;a href="http://catalyst.perl.org/">Catalyst&lt;/a>. We
+ currently run it using the Russian web server
+ &lt;a href="http://wiki.codemongers.com/Main">Nginx&lt;/a> and standalone fastcgi
+ servers. I am using the Moose based
+ &lt;a href="http://search.cpan.org/~stevan/FCGI-Engine-0.06/">CGI::Engine&lt;/a>
+ distribution by Stevan Little to start the servers. This module makes it
+ really easy to manage your applications. You just create a YML config file
+ like this:
+&lt;/p>
+&lt;pre>
+---
+- name: "iusethis-osx.server"
+ nproc: 4
+ scriptname: "/www/iusethis-osx/script/iusethis_fastcgi.pl"
+ pidfile: "/var/run/iusethis-osx.pid"
+ socket: "/var/run/iusethis-osx.sock" 
+&lt;/pre>
+&lt;p>
+ with an entry for each server you want to run. (Note that the paths has been
+ changed to protect the innocent.) Then you just create a simple perl script
+ (See the
+ &lt;a
+ href="http://search.cpan.org/~stevan/FCGI-Engine-0.06/lib/FCGI/Engine/Manager.pm"
+ >FCGI::Engine::Manager SYNOPSIS&lt;/a
+ >
+ for a sample), and you can easily start, stop and check the status for each
+ application individually or every application in your config. If you have a
+ system v style init, you can just stick the script in /etc/init.d/ and it will
+ behave just like any of your other startup scripts.
+&lt;/p></description></item></channel></rss>

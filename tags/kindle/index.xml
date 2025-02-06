@@ -1,5 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Kindle on marcus</title><link>https://marcus.means.no/tags/kindle/</link><description>Recent content in Kindle on marcus</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Thu, 06 Aug 2009 00:00:00 +0000</lastBuildDate><atom:link href="https://marcus.means.no/tags/kindle/index.xml" rel="self" type="application/rss+xml"/><item><title>Modding kindle for european networks</title><link>https://marcus.means.no/post/2009-08-06-modding-kindle-for-european-networks/</link><pubDate>Thu, 06 Aug 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-08-06-modding-kindle-for-european-networks/</guid><description>So some European madman got himself a Kindle on the 30. July, and the first thing he did with it is pop it open and replace the US-centric mobile card: I modded the
-Kindle 2 with a
-3G HSPA modem and a
-SIM-card holder for use in
-Europe. Apparently It's not tested at all yet, so I'm very interested to see how this turns out. He will probably need some software support to get it working.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Kindle on marcus</title><link>https://marcus.means.no/tags/kindle/</link><description>Recent content in Kindle on marcus</description><generator>Hugo</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Thu, 06 Feb 2025 20:57:08 +0100</lastBuildDate><atom:link href="https://marcus.means.no/tags/kindle/index.xml" rel="self" type="application/rss+xml"/><item><title>Modding kindle for european networks</title><link>https://marcus.means.no/post/2009-08-06-modding-kindle-for-european-networks/</link><pubDate>Thu, 06 Aug 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-08-06-modding-kindle-for-european-networks/</guid><description>&lt;p>
+ So some European madman got himself a Kindle on the 30. July, and the first
+ thing he did with it is pop it open and replace the US-centric mobile card:
+&lt;/p>
+&lt;blockquote>
+ &lt;p>
+ I modded the&lt;br />
+ Kindle 2 with a&lt;br />
+ 3G HSPA modem and a&lt;br />
+ SIM-card holder for use in&lt;br />
+ Europe.
+ &lt;/p>
+&lt;/blockquote>
+&lt;p>
+ Apparently It's not tested at all yet, so I'm very interested to see how this
+ turns out. He will probably need some software support to get it working.
+ Somehow I still think he needs to work around the GPS Amazon use to track the
+ location of your device.
+&lt;/p></description></item></channel></rss>

@@ -1,1 +1,18 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>iwatchthis on marcus</title><link>https://marcus.means.no/tags/iwatchthis/</link><description>Recent content in iwatchthis on marcus</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Sat, 21 Feb 2009 00:00:00 +0000</lastBuildDate><atom:link href="https://marcus.means.no/tags/iwatchthis/index.xml" rel="self" type="application/rss+xml"/><item><title>pwn!youtube and all that jazz</title><link>https://marcus.means.no/post/2009-02-21-pwnyoutube-and-all-that-jazz/</link><pubDate>Sat, 21 Feb 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-02-21-pwnyoutube-and-all-that-jazz/</guid><description>Want to download that youtube video you saw to your hard drive? Now you can. simply add 'pwn' to the hostname in the url. pwnyoutube.com provides both flv and mpeg4 downloads (when available from youtube). If you prefer, you can also use a bookmarklet. Using this service, I have added a download link to all youtube videos on our video bookmarking service iwatchthis. I find it interesting that streaming copyrighted material seems more acceptable to old media than straight downloads.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Iwatchthis on marcus</title><link>https://marcus.means.no/tags/iwatchthis/</link><description>Recent content in Iwatchthis on marcus</description><generator>Hugo</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Thu, 06 Feb 2025 20:57:08 +0100</lastBuildDate><atom:link href="https://marcus.means.no/tags/iwatchthis/index.xml" rel="self" type="application/rss+xml"/><item><title>pwn!youtube and all that jazz</title><link>https://marcus.means.no/post/2009-02-21-pwnyoutube-and-all-that-jazz/</link><pubDate>Sat, 21 Feb 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-02-21-pwnyoutube-and-all-that-jazz/</guid><description>&lt;p>
+ Want to download that youtube video you saw to your hard drive? Now you can.
+ simply add 'pwn' to the hostname in the url.
+ &lt;a href="http://pwnyoutube.com">pwnyoutube.com&lt;/a> provides both flv and mpeg4
+ downloads (when available from youtube). If you prefer, you can also use a
+ bookmarklet. Using this service, I have added a download link to all youtube
+ videos on our video bookmarking service
+ &lt;a href="http://iwatchthis.com/">iwatchthis&lt;/a>.
+&lt;/p>
+&lt;p>
+ I find it interesting that streaming copyrighted material seems more
+ acceptable to old media than straight downloads. This seems to stem from some
+ deep misunderstanding about it being possible to restrict what you are able to
+ do with media while still letting you play it back on your own system. This is
+ just as wrong for streaming as it has been for every encryption-based scheme
+ they've tried up until now. I'm guessing it won't be long until you get a
+ 'save from spotify' utility as well.
+&lt;/p></description></item></channel></rss>

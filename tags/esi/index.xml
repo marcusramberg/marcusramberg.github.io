@@ -1,1 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>esi on marcus</title><link>https://marcus.means.no/tags/esi/</link><description>Recent content in esi on marcus</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Mon, 25 May 2009 00:00:00 +0000</lastBuildDate><atom:link href="https://marcus.means.no/tags/esi/index.xml" rel="self" type="application/rss+xml"/><item><title>Handy varnish tips</title><link>https://marcus.means.no/post/2009-05-25-handy-varnish-tips/</link><pubDate>Mon, 25 May 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-05-25-handy-varnish-tips/</guid><description>We depend heavily on the varnish cache to run iusethis and our other sites. These tips from Kristian@linpro are a must read: ESI is cool. And requires more session workspace. If you don’t increase the value of sess_workspace (default: 16kb. Advised value: 32kb or more), you are likely to see assert errors in your syslog. (Hint: If you are going wtf is ESI, you really want to find out more :)</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Esi on marcus</title><link>https://marcus.means.no/tags/esi/</link><description>Recent content in Esi on marcus</description><generator>Hugo</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Thu, 06 Feb 2025 20:57:08 +0100</lastBuildDate><atom:link href="https://marcus.means.no/tags/esi/index.xml" rel="self" type="application/rss+xml"/><item><title>Handy varnish tips</title><link>https://marcus.means.no/post/2009-05-25-handy-varnish-tips/</link><pubDate>Mon, 25 May 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-05-25-handy-varnish-tips/</guid><description>&lt;p>
+ We depend heavily on the varnish cache to run iusethis and our other sites.
+ These tips from Kristian@linpro are a must read:
+&lt;/p>
+&lt;blockquote>
+ &lt;p>
+ ESI is cool. And requires more session workspace. If you don’t increase the
+ value of sess_workspace (default: 16kb. Advised value: 32kb or more), you
+ are likely to see assert errors in your syslog.
+ &lt;/p>
+&lt;/blockquote>
+&lt;p>(Hint: If you are going wtf is ESI, you really want to find out more :)&lt;/p></description></item></channel></rss>

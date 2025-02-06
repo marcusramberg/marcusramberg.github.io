@@ -1,3 +1,43 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>VCS on marcus</title><link>https://marcus.means.no/tags/vcs/</link><description>Recent content in VCS on marcus</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Mon, 30 Mar 2009 00:00:00 +0000</lastBuildDate><atom:link href="https://marcus.means.no/tags/vcs/index.xml" rel="self" type="application/rss+xml"/><item><title>Using github's forking features.</title><link>https://marcus.means.no/post/2009-03-30-using-githubs-forking-features/</link><pubDate>Mon, 30 Mar 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-03-30-using-githubs-forking-features/</guid><description>A few week back, I commented some concerns about git causing silos. I think this is a really good post by chris from github, illustrating the advantages of fully distributed development: It may seem strange, and perhaps even like a lot of work. “Why should I have to check to see which is the most current? In the old model, there’s always a canonical repository.” In the old model, action-web-service wouldn’t have made it past 1.</description></item><item><title>Easy remote branches with git</title><link>https://marcus.means.no/post/2009-03-12-easy-remote-branches-with-git/</link><pubDate>Thu, 12 Mar 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-03-12-easy-remote-branches-with-git/</guid><description>Think remote branch management is a hassle with git? This nice ruby-based helper should sort you out:
-$ sudo gem install git_remote_branch ... $ grb To get a quick explanation of how it works. Or read on at Git Ready</description></item><item><title>Git results in silos?</title><link>https://marcus.means.no/post/2009-03-09-git-results-in-silos/</link><pubDate>Mon, 09 Mar 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-03-09-git-results-in-silos/</guid><description>Simon Wistow worries that the distributed nature of git results in fragmented software projects: That model works well for Linux. Maybe. I'll presume it does. Git eases the pain points expressed by Andrew Morton, the maintainer of the -mm tree, in this message entitled "This Just Isn't Working Any More" In short, it makes siloing easier.
-My immediate reaction to reading his post was to think of the old saying ‹‹Guns don't kill people, people kill people››.</description></item><item><title>Using rebase with git pull</title><link>https://marcus.means.no/post/2009-02-12-using-rebase-with-git-pull/</link><pubDate>Thu, 12 Feb 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-02-12-using-rebase-with-git-pull/</guid><description>Great tip about using rebase when you pull from remote to get a cleaner git commit timeline.</description></item><item><title>eg makes it really easy for svn users to switch to git</title><link>https://marcus.means.no/post/2009-02-04-eg-makes-it-really-easy-for-svn-users-to-switch-to-git/</link><pubDate>Wed, 04 Feb 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-02-04-eg-makes-it-really-easy-for-svn-users-to-switch-to-git/</guid><description>Are you trying to sell in git to your colleagues, who are afraid of learning anything new? easy git might be the ticket to convince them. Check out the side-by-side comparison on how to do things in svn and eg</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>VCS on marcus</title><link>https://marcus.means.no/tags/vcs/</link><description>Recent content in VCS on marcus</description><generator>Hugo</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Thu, 06 Feb 2025 20:57:08 +0100</lastBuildDate><atom:link href="https://marcus.means.no/tags/vcs/index.xml" rel="self" type="application/rss+xml"/><item><title>Using github's forking features.</title><link>https://marcus.means.no/post/2009-03-30-using-githubs-forking-features/</link><pubDate>Mon, 30 Mar 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-03-30-using-githubs-forking-features/</guid><description>&lt;p>
+ A few week back, I commented some concerns about
+ &lt;a
+ href="http://marcus.nordaaker.com/2009/03/git-results-in-silosgit-results-in-silos/"
+ >git causing silos&lt;/a
+ >. I think this is a really good post by chris from github, illustrating the
+ advantages of fully distributed development:
+&lt;/p>
+&lt;blockquote>
+ &lt;p>
+ It may seem strange, and perhaps even like a lot of work. “Why should I have
+ to check to see which is the most current? In the old model, there’s always
+ a canonical repository.”
+ &lt;/p>
+ &lt;p>
+ In the old model, action-web-service wouldn’t have made it past 1.2.6.
+ Welcome to distributed version control.
+ &lt;/p></description></item><item><title>Easy remote branches with git</title><link>https://marcus.means.no/post/2009-03-12-easy-remote-branches-with-git/</link><pubDate>Thu, 12 Mar 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-03-12-easy-remote-branches-with-git/</guid><description>&lt;p>Think remote branch management is a hassle with git? This nice ruby-based helper should sort you out:&lt;/p>
+&lt;pre>$ sudo gem install git_remote_branch
+...
+$ grb
+&lt;/pre>
+&lt;p>To get a quick explanation of how it works. Or read on at &lt;a href="http://gitready.com/advanced/2009/03/11/easily-manage-git-remote-branches.html">Git Ready&lt;/a>&lt;/p></description></item><item><title>Git results in silos?</title><link>https://marcus.means.no/post/2009-03-09-git-results-in-silos/</link><pubDate>Mon, 09 Mar 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-03-09-git-results-in-silos/</guid><description>&lt;p>
+ &lt;em
+ >Simon Wistow worries that the distributed nature of git results in
+ fragmented software projects:&lt;/em
+ >
+&lt;/p>
+&lt;blockquote>
+ &lt;p>
+ That model works well for Linux. Maybe. I'll presume it does. Git eases the
+ pain points expressed by Andrew Morton, the maintainer of the -mm tree, in
+ this message entitled "This Just Isn't Working Any More"
+ &lt;/p>
+ &lt;p>In short, it makes siloing easier.&lt;/p>
+&lt;/blockquote>
+&lt;p>
+ My immediate reaction to reading his post was to think of the old saying
+ ‹‹Guns don't kill people, people kill people››. In fact, my experiences with
+ forks so far has been two cases of forking repos on github, and doing a pull
+ request to the author when my fixes were fit to be included in the main
+ distribution. In both cases the authors included my changes in their versions.
+&lt;/p></description></item><item><title>Using rebase with git pull</title><link>https://marcus.means.no/post/2009-02-12-using-rebase-with-git-pull/</link><pubDate>Thu, 12 Feb 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-02-12-using-rebase-with-git-pull/</guid><description>&lt;p>Great tip about using rebase when you pull from remote to get a cleaner git commit timeline.&lt;/p></description></item><item><title>eg makes it really easy for svn users to switch to git</title><link>https://marcus.means.no/post/2009-02-04-eg-makes-it-really-easy-for-svn-users-to-switch-to-git/</link><pubDate>Wed, 04 Feb 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-02-04-eg-makes-it-really-easy-for-svn-users-to-switch-to-git/</guid><description>&lt;p>Are you trying to sell in git to your colleagues, who are afraid of learning anything new? easy git might be the ticket to convince them. Check out the side-by-side comparison on how to do things in svn and eg&lt;/p></description></item></channel></rss>

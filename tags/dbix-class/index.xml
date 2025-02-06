@@ -1,2 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>dbix-class on marcus</title><link>https://marcus.means.no/tags/dbix-class/</link><description>Recent content in dbix-class on marcus</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Thu, 03 Jun 2010 00:00:00 +0000</lastBuildDate><atom:link href="https://marcus.means.no/tags/dbix-class/index.xml" rel="self" type="application/rss+xml"/><item><title>Moose-ish DBIC Schemas</title><link>https://marcus.means.no/post/2010-06-03-mooseish-dbic-schemas/</link><pubDate>Thu, 03 Jun 2010 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2010-06-03-mooseish-dbic-schemas/</guid><description> Longing for a more Moose-ish DBIx::Class? Eventually there will be MooseX::DBIC, but if you need something while you're waiting, you could check out MooseX::DBIC::AddColumn which lets you do Moose-like column definitions in your Result classes.</description></item><item><title>DBIx-Class about to switch to git</title><link>https://marcus.means.no/post/2010-06-01-dbix-class-about-to-switch-to-git/</link><pubDate>Tue, 01 Jun 2010 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2010-06-01-dbix-class-about-to-switch-to-git/</guid><description>12:27 &amp;lt;ribasushi&amp;gt; a call to all git-heads
-12:28 &amp;lt;ribasushi&amp;gt; recently haarg did a seemingly perfect conversion of dbic from svn to git (a non-trivial feat) 12:28 &amp;lt;ribasushi&amp;gt; I am calling for people who actually know git to randomly poke at the new history and notify me of whatever problems they see 12:28 &amp;lt;ribasushi&amp;gt; http://github.com/haarg/DBIx-Class 12:29 &amp;lt;ribasushi&amp;gt; (also you can ascertain the quality of the conversion, and potentially draft haarg to do a catalyst conversion as well - it took him a couple of freaking hours to do dbic) 12:32 &amp;lt;marcus&amp;gt; awesome</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Dbix-Class on marcus</title><link>https://marcus.means.no/tags/dbix-class/</link><description>Recent content in Dbix-Class on marcus</description><generator>Hugo</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Thu, 06 Feb 2025 20:57:08 +0100</lastBuildDate><atom:link href="https://marcus.means.no/tags/dbix-class/index.xml" rel="self" type="application/rss+xml"/><item><title>Moose-ish DBIC Schemas</title><link>https://marcus.means.no/post/2010-06-03-mooseish-dbic-schemas/</link><pubDate>Thu, 03 Jun 2010 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2010-06-03-mooseish-dbic-schemas/</guid><description>&lt;p>
+ Longing for a more Moose-ish DBIx::Class? Eventually there will be
+ MooseX::DBIC, but if you need something while you're waiting, you could check
+ out MooseX::DBIC::AddColumn which lets you do Moose-like column definitions in
+ your Result classes.
+&lt;/p></description></item><item><title>DBIx-Class about to switch to git</title><link>https://marcus.means.no/post/2010-06-01-dbix-class-about-to-switch-to-git/</link><pubDate>Tue, 01 Jun 2010 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2010-06-01-dbix-class-about-to-switch-to-git/</guid><description>&lt;blockquote>
+ &lt;p>12:27 &amp;lt;ribasushi&amp;gt; a call to all git-heads&lt;/p>
+ &lt;p>
+ 12:28 &amp;lt;ribasushi&amp;gt; recently haarg did a seemingly perfect conversion of
+ dbic from svn to git (a non-trivial feat)
+ &lt;/p>
+ &lt;p>
+ 12:28 &amp;lt;ribasushi&amp;gt; I am calling for people who actually know git to
+ randomly poke at the new history and notify me of whatever problems they see
+ &lt;/p>
+ &lt;p>
+ 12:28 &amp;lt;ribasushi&amp;gt;
+ &lt;a href="http://github.com/haarg/DBIx-Class"
+ >http://github.com/haarg/DBIx-Class&lt;/a
+ >
+ &lt;/p>
+ &lt;p>
+ 12:29 &amp;lt;ribasushi&amp;gt; (also you can ascertain the quality of the
+ conversion, and potentially draft haarg to do a catalyst conversion as well
+ - it took him a couple of freaking hours to do dbic)
+ &lt;/p></description></item></channel></rss>

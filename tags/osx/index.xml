@@ -1,2 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>osx on marcus</title><link>https://marcus.means.no/tags/osx/</link><description>Recent content in osx on marcus</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Tue, 22 Jun 2010 00:00:00 +0000</lastBuildDate><atom:link href="https://marcus.means.no/tags/osx/index.xml" rel="self" type="application/rss+xml"/><item><title>i use this, now 50% more social.</title><link>https://marcus.means.no/post/2010-06-22-i-use-this-now-with-50-more-social/</link><pubDate>Tue, 22 Jun 2010 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2010-06-22-i-use-this-now-with-50-more-social/</guid><description>We've just pushed a major update to iusethis, adding several social features and updating the commenting system with support for replies. To improve performance, we've also added a new caching system, to allow us to cache more data for logged-in users. Find your friends Looking up your contacts in GMail is a feature that we've wanted for a long time, but we did not want to compromise users by asking for their passwords.</description></item><item><title>Fixing the POD synopsis in OSX</title><link>https://marcus.means.no/post/2009-05-18-fixing-the-pod-synopsis-in-osx/</link><pubDate>Mon, 18 May 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-05-18-fixing-the-pod-synopsis-in-osx/</guid><description> Having problems copying example code from POD and getting invalid characters in your Perl? Apparently this is a problem with nroff on OS X (According to my linux hacking peeps), but the solution is quite simple. Just stuff this in your .profile or whatever ;) alias perldoc='perldoc -t'
-And your pod is rendered in glorious pure-text, without using weird characters for ' and -.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Osx on marcus</title><link>https://marcus.means.no/tags/osx/</link><description>Recent content in Osx on marcus</description><generator>Hugo</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Thu, 06 Feb 2025 20:57:08 +0100</lastBuildDate><atom:link href="https://marcus.means.no/tags/osx/index.xml" rel="self" type="application/rss+xml"/><item><title>i use this, now 50% more social.</title><link>https://marcus.means.no/post/2010-06-22-i-use-this-now-with-50-more-social/</link><pubDate>Tue, 22 Jun 2010 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2010-06-22-i-use-this-now-with-50-more-social/</guid><description>&lt;p>
+ We've just pushed a major update to iusethis, adding several social features
+ and updating the commenting system with support for replies. To improve
+ performance, we've also added a new caching system, to allow us to cache more
+ data for logged-in users.
+&lt;/p>
+&lt;h2>Find your friends&lt;/h2>
+&lt;p>
+ Looking up your contacts in GMail is a feature that we've wanted for a long
+ time, but we did not want to compromise users by asking for their passwords.
+ Now that Google supports OAuth we were able to implement it the way we wanted.
+ In order to use it, go to your profile and click the 'more' link on the
+ 'friends' sidebar:
+&lt;/p></description></item><item><title>Fixing the POD synopsis in OSX</title><link>https://marcus.means.no/post/2009-05-18-fixing-the-pod-synopsis-in-osx/</link><pubDate>Mon, 18 May 2009 00:00:00 +0000</pubDate><guid>https://marcus.means.no/post/2009-05-18-fixing-the-pod-synopsis-in-osx/</guid><description>&lt;p>
+ Having problems copying example code from POD and getting invalid characters
+ in your Perl? Apparently this is a problem with nroff on OS X (According to my
+ linux hacking peeps), but the solution is quite simple. Just stuff this in
+ your .profile or whatever ;)
+&lt;/p>
+&lt;p>&lt;code>alias perldoc='perldoc -t'&lt;/code>&lt;/p>
+&lt;p>
+ And your pod is rendered in glorious pure-text, without using weird characters
+ for ' and -.
+&lt;/p></description></item></channel></rss>
