@@ -1,0 +1,115 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Making (things|code|mischief|mistakes)."><meta name=author content="Marcus Ramberg"><meta name=generator content="Hugo 0.143.1"><title>Building a Grafana Kiosk With Nixos -- marcus</title>
+<link href=https://marcus.means.no//css/bootstrap.min.css rel=stylesheet><link href=https://marcus.means.no//css/clean-blog.min.css rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin=anonymous referrerpolicy=no-referrer><link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel=stylesheet type=text/css><link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel=stylesheet type=text/css><meta property="og:title" content="Building a Grafana Kiosk With Nixos"><meta property="og:url" content="https://marcus.means.no//"><meta property="og:image" content="https://marcus.means.no//"></head><body><nav class="navbar navbar-default navbar-custom navbar-fixed-top"><div class=container-fluid><div class="navbar-header page-scroll"><button type=button class=navbar-toggle data-toggle=collapse data-target=#bs-example-navbar-collapse-1>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+</button>
+<a class=navbar-brand href=https://marcus.means.no/>marcus</a></div><div class="collapse navbar-collapse" id=bs-example-navbar-collapse-1><ul class="nav navbar-nav navbar-right"><li><a href=/>Home</a></li><li><a href=/tags/>Tags</a></li><li><a href=/post/>Archives</a></li></ul></div></div></nav><header class=intro-header style="background-image:linear-gradient( rgba(0,0,0,.5),rgba(0,0,0,.5) ),url(https://marcus.means.no//img/post-bg.jpg)"><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><h1>Building a Grafana Kiosk With Nixos</h1><h2 class=subheading></h2><span class=meta><small>2025-05-25</small>
+&minus; &#127991;
+<a class=tag href=/tags/post>post</a></span></div></div></div></div></header><article><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><p>At work, we&rsquo;re passionate about data diven decisions. Among others we use
+<a href=https://grafana.com/>Grafana</a> to visualize our key metrics .
+We recently acquired a number of dual TV stands for our teams, and we wanted to use them to display our Grafana dashboards.
+After experimenting with PI4s and finding the 4k support lacking, we decided to use go for a n100-based mini pc model.
+Flashing and maintaining a number of pcs can be painful, so we desided to use a declarative setup and flash stateless
+<a href=https://nixos.org>NixOS</a> configurations. In order to bootstrap the PCs as quickly as possible, we use
+<a href=https://github.com/chrillefkr/nixos-unattended-installer>nixos-unattended-installer</a> and <a href=https://github.com/nix-community/disko>disko</a>.</p><p>From USB boot to installed on disk it&rsquo;s less than 10 minutes, and we can bake in all the configuration we need,
+including team credentials and Grafana playlists to render. Using ssh we can also easily push new configurations if
+needed.</p><h2 id=disko>Disko</h2><p>When you have a set of identical machines, <a href=https://github.com/nix-community/disko>disko</a> is awesome for partitioning
+and formatting disks. It&rsquo;s a declarative way of configuring your partition layout, and it integrates great with
+nixos-unattended-installer.</p><p>First we need to add the disko module from the flake to our nixos system configuration
+partitions.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nix data-lang=nix><span style=display:flex><span>        cs <span style=color:#f92672>=</span> nixpkgs<span style=color:#f92672>.</span>lib<span style=color:#f92672>.</span>nixosSystem {
+</span></span><span style=display:flex><span>          system <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;x86_64-linux&#34;</span>;
+</span></span><span style=display:flex><span>          modules <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>            disko<span style=color:#f92672>.</span>nixosModules<span style=color:#f92672>.</span>disko
+</span></span><span style=display:flex><span>            <span style=color:#f92672>...</span>
+</span></span></code></pre></div><p>then we set up actual partitions</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nix data-lang=nix><span style=display:flex><span>                disko<span style=color:#f92672>.</span>devices<span style=color:#f92672>.</span>disk<span style=color:#f92672>.</span>nvme <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>                  device <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;/dev/nvme0n1&#34;</span>;
+</span></span><span style=display:flex><span>                  type <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;disk&#34;</span>;
+</span></span><span style=display:flex><span>                  content <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>                    type <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;gpt&#34;</span>;
+</span></span><span style=display:flex><span>                    partitions <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>                      ESP <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>                        type <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;EF00&#34;</span>;
+</span></span><span style=display:flex><span>                        size <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;500M&#34;</span>;
+</span></span><span style=display:flex><span>                        content <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>                          type <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;filesystem&#34;</span>;
+</span></span><span style=display:flex><span>                          format <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;vfat&#34;</span>;
+</span></span><span style=display:flex><span>                          mountpoint <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;/boot&#34;</span>;
+</span></span><span style=display:flex><span>                        };
+</span></span><span style=display:flex><span>                      };
+</span></span><span style=display:flex><span>                      root <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>                        size <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;100%&#34;</span>;
+</span></span><span style=display:flex><span>                        content <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>                          type <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;filesystem&#34;</span>;
+</span></span><span style=display:flex><span>                          format <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;ext4&#34;</span>;
+</span></span><span style=display:flex><span>                          mountpoint <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;/&#34;</span>;
+</span></span><span style=display:flex><span>                        };
+</span></span><span style=display:flex><span>                      };
+</span></span><span style=display:flex><span>                    };
+</span></span><span style=display:flex><span>                  };
+</span></span><span style=display:flex><span>                };
+</span></span></code></pre></div><p>As you can see we&rsquo;re just setting up a small UEFI esp partition and allocating the rest of the space to root.</p><h2 id=nioxs-unattended-installer>nioxs-unattended-installer</h2><p>This is a major win for us, as it&rsquo;s a completely hands off installation process. Unfortunately we have to disable secure
+boot on the machines in the bios, if I had to do a lot more of them I&rsquo;d probably automate the process using something
+like a PI sending usb keyboard keystrokes with something like the <a href=https://pikvm.org/>pikvm</a> recorder.</p><p>We just have to use their disko wrapper around the defined nixos configuration:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nix data-lang=nix><span style=display:flex><span>cs-installer <span style=color:#f92672>=</span> unattended-installer<span style=color:#f92672>.</span>lib<span style=color:#f92672>.</span>diskoInstallerWrapper self<span style=color:#f92672>.</span>nixosConfigurations<span style=color:#f92672>.</span>cs { };
+</span></span></code></pre></div><h2 id=graphics-environment>Graphics environment</h2><p>In this example we chose xfce4 as a desktop environment, it&rsquo;s lightweight and supports multiple monitors in a way that&rsquo;s
+pleasing to us. Having this also allows the team to debug any local issues like network problems, but if you want a more
+locked down environment you could also use something like cage or i3 and not support any system access.
+The nixos configuration looks something like this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nix data-lang=nix><span style=display:flex><span>    services<span style=color:#f92672>.</span>xserver <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>      enable <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>      desktopManager<span style=color:#f92672>.</span>xfce <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>        enable <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>        enableScreensaver <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>      };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      displayManager <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>        lightdm <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>          enable <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>          greeters<span style=color:#f92672>.</span>tiny<span style=color:#f92672>.</span>enable <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>        };
+</span></span><span style=display:flex><span>      };
+</span></span><span style=display:flex><span>    };
+</span></span></code></pre></div><p>We have to setup the DM to ensure automatic login.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nix data-lang=nix><span style=display:flex><span>services<span style=color:#f92672>.</span>displayManager <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>  defaultSession <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;xfce4&#34;</span>;
+</span></span><span style=display:flex><span>  autoLogin<span style=color:#f92672>.</span>user <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;kiosk&#34;</span>;
+</span></span><span style=display:flex><span>};
+</span></span></code></pre></div><h2 id=grafana-kiosk>Grafana Kiosk</h2><h3 id=systemd-services>Systemd services</h3><p>The recommended way to run grafana kiosk is to use a systemd service. happily that is easy enough in nixos. This also
+ensures that the kiosk app is automatically restarted if it should crash.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nix data-lang=nix><span style=display:flex><span>  systemd<span style=color:#f92672>.</span>services <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>    grafana-kiosk-1 <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>      enable <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>      after <span style=color:#f92672>=</span> [ <span style=color:#e6db74>&#34;network.target&#34;</span> ];
+</span></span><span style=display:flex><span>      wantedBy <span style=color:#f92672>=</span> [ <span style=color:#e6db74>&#34;graphical.target&#34;</span> ];
+</span></span><span style=display:flex><span>      description <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;Grafana Kiosk Screen 1&#34;</span>;
+</span></span><span style=display:flex><span>      serviceConfig <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>        User <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;kiosk&#34;</span>;
+</span></span><span style=display:flex><span>        Restart <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;always&#34;</span>;
+</span></span><span style=display:flex><span>        RestartSec <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;20&#34;</span>;
+</span></span><span style=display:flex><span>      };
+</span></span><span style=display:flex><span>      environment <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>        DISPLAY <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;:0&#34;</span>;
+</span></span><span style=display:flex><span>        XAUTHORITY <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;/home/kiosk/.Xauthority&#34;</span>;
+</span></span><span style=display:flex><span>      };
+</span></span><span style=display:flex><span>      serviceConfig <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>        Type <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;simple&#34;</span>;
+</span></span><span style=display:flex><span>        ExecStartPre <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>          <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>pkgs<span style=color:#f92672>.</span>xorg<span style=color:#f92672>.</span>xset<span style=color:#e6db74>}</span><span style=color:#e6db74>/bin/xset s off&#34;</span>
+</span></span><span style=display:flex><span>          <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>pkgs<span style=color:#f92672>.</span>xorg<span style=color:#f92672>.</span>xset<span style=color:#e6db74>}</span><span style=color:#e6db74>/bin/xset s noblank&#34;</span>
+</span></span><span style=display:flex><span>          <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>pkgs<span style=color:#f92672>.</span>xorg<span style=color:#f92672>.</span>xset<span style=color:#e6db74>}</span><span style=color:#e6db74>/bin/xset -dpms&#34;</span>
+</span></span><span style=display:flex><span>        ];
+</span></span><span style=display:flex><span>        ExecStart <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>pkgs<span style=color:#f92672>.</span>grafana-kiosk<span style=color:#e6db74>}</span><span style=color:#e6db74>/bin/grafana-kiosk com -URL </span><span style=color:#e6db74>${</span>builtins<span style=color:#f92672>.</span>elemAt settings<span style=color:#f92672>.</span>playlists <span style=color:#ae81ff>0</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>;
+</span></span><span style=display:flex><span>      };
+</span></span><span style=display:flex><span>    };
+</span></span></code></pre></div><p>In order to run multiple of these, you&rsquo;d start the second one with a offset param to grafana -kiosk like
+-window-position 3841,0 for</p><p>Note that you&rsquo;ll probably need to authentication to your Grafana instance, see the
+<a href=https://github.com/grafana/grafana-kiosk>README</a> for details on various auth schemes. In our case we use IAP and
+provide a service account with minimal permissions per team. You might also want to adjust RestartSec for your setup for
+faster startup or to avoid restart back-off.</p><p>Other than that it&rsquo;s pretty much stock nixos config, like setting up networking and adding the kiosk user and enabling
+openssh for remote management. I&rsquo;ll leave that as an exercise for the reader. The <a href=https://nixos.org/manual/nixos/stable/#ch-configuration>nixos manual</a>
+should come in handy.</p><p>Once you have this configuration in a flake, you can build a iso image for flashing using something like</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nix data-lang=nix><span style=display:flex><span>nix build <span style=color:#e6db74>&#34;path:.#nixosConfigurations.cs-installer.config.system.build.isoImage&#34;</span>
+</span></span></code></pre></div><p>In this case we&rsquo;re using path: to be able to include credentials without adding them to the git index.</p><h2 id=future-improvements>Future improvements</h2><ul><li>setting up a tunnel for management using something like <a href=https://github.com/cloudflare/cloudflared>cloudflared</a> or
+<a href=https://tailscale.net/>tailscale</a>. nix already has nice modules for configuring both of these.</li><li>Using something like <a href=https://github.com/serokell/deploy-rs>deploy-rs</a> or
+(colmena](<a href=https://github.com/zhaofengli/colmena>https://github.com/zhaofengli/colmena</a>) to do OTA updates.</li><li>Using external secrets management with something like <a href=https://github.com/Mic92/sops-nix>sops-nix</a> to allow using a
+<a href=https://www.maxdaten.io/2023-12-11-deploy-sops-secrets-with-nix>cloud kvm</a></li></ul><script src=https://giscus.app/client.js data-repo=marcusramberg/blog data-repo-id="MDEwOlJlcG9zaXRvcnkyNzAwODc0ODA=" data-category=Announcements data-category-id=DIC_kwDOEBk1OM4CVAZX data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=transparent_dark data-lang=en crossorigin=anonymous async></script></div></div></div></article><hr><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a href=mailto:marcus@means.no><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
+<i class="fa-regular fa-envelope fa-stack-1x fa-inverse"></i></span></a></li><li><a rel=me href=https://hachyderm.io/@marcus><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
+<i class="fa-brands fa-mastodon fa-stack-1x fa-inverse"></i></span></a></li><li><a rel=me href=https://github.com/marcusramberg><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
+<i class="fa-brands fa-github fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="copyright text-muted"><a href=https://github.com/marcusramberg/blog/>Code released under the MIT license.</a></p></div></div></div></footer><script src=https://marcus.means.no//js/jquery.min.js></script><script src=https://marcus.means.no//js/bootstrap.min.js></script></body></html>

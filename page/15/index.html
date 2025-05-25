@@ -5,7 +5,13 @@
 <span class=icon-bar></span>
 <span class=icon-bar></span>
 </button>
-<a class=navbar-brand href=https://marcus.means.no/>marcus</a></div><div class="collapse navbar-collapse" id=bs-example-navbar-collapse-1><ul class="nav navbar-nav navbar-right"><li><a href=/>Home</a></li><li><a href=/tags/>Tags</a></li><li><a href=/post/>Archives</a></li></ul></div></div></nav><header class=intro-header style=background-image:url(https://marcus.means.no//img/home-bg.jpg)><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=site-heading><h1>marcus</h1><hr class=small><span class=subheading>Making (things|code|mischief|mistakes).</span></div></div></div></div></header><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-preview><h2 class=post-title><a href=https://marcus.means.no/post/2012-05-07-makers/>Makers</a></h2><section class=summary><p><strong>You can start making something in seconds.<br>One simple idea is all you need before your brain<br>automatically explores problems, solutions, and dreams.<br>Turning that idea into something tangible and wonderful is harder.<br>You need structure, strategies, people, hard work.</strong></p><p>The software world is young and we are still figuring out the most basic
+<a class=navbar-brand href=https://marcus.means.no/>marcus</a></div><div class="collapse navbar-collapse" id=bs-example-navbar-collapse-1><ul class="nav navbar-nav navbar-right"><li><a href=/>Home</a></li><li><a href=/tags/>Tags</a></li><li><a href=/post/>Archives</a></li></ul></div></div></nav><header class=intro-header style=background-image:url(https://marcus.means.no//img/home-bg.jpg)><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=site-heading><h1>marcus</h1><hr class=small><span class=subheading>Making (things|code|mischief|mistakes).</span></div></div></div></div></header><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-preview><h2 class=post-title><a href=https://marcus.means.no/post/2012-07-11-dont-animate-scrollto-of-the-body-on-ios/>Don't animate scrollTo of the body on iOS.</a></h2><section class=summary><p>Animate body.offsetTop and body.offsetLeft works great on the desktop, but  is hugely buggy on MobileSafari. Instead, make a viewport div that fills the screen, and animate the offset on that.</p><p>I hope this helps someone, as I spent 3 hours figuring it out.</p></section><p class=post-meta><small>2012-07-11</small>
+&minus; &#127991;
+<a class=tag href=/tags/animation>animation</a>
+&#127991;
+<a class=tag href=/tags/ios>ios</a>
+&#127991;
+<a class=tag href=/tags/javascript>javascript</a></p></div><hr><div class=post-preview><h2 class=post-title><a href=https://marcus.means.no/post/2012-05-07-makers/>Makers</a></h2><section class=summary><p><strong>You can start making something in seconds.<br>One simple idea is all you need before your brain<br>automatically explores problems, solutions, and dreams.<br>Turning that idea into something tangible and wonderful is harder.<br>You need structure, strategies, people, hard work.</strong></p><p>The software world is young and we are still figuring out the most basic
 processes of the craft. For instance, we tend to label ourself architects or
 designers, inspired by people who build houses or work in mass production.</p><a href=/post/2012-05-07-makers/>Read More...</a></section><p class=post-meta><small>2012-05-07</small>
 &minus; &#127991;
@@ -109,33 +115,6 @@ it to 'mg':</p><a href=/post/2011-11-30-mojo-get-is-x-ray-for-the-web/>Read More
 <a class=tag href=/tags/http>http</a>
 &#127991;
 <a class=tag href=/tags/mojolicious>mojolicious</a>
-&#127991;
-<a class=tag href=/tags/perl>perl</a></p></div><hr><div class=post-preview><h2 class=post-title><a href=https://marcus.means.no/post/2011-01-08-easily-integrating-your-mojolicious-app-with-facebook/>Easily integrating your Mojolicious app with Facebook.</a></h2><section class=summary><p>Facebook has recently released a<a href=http://graph.facebook.com/> new Graph API</a>. It's a simple RESTish API, and uses the newly released OAuth2 spec for authorization. This makes it a great match for <a href=http://mojolicio.us>Mojolicious</a>, and using my new <a href=https://github.com/marcusramberg/mojolicious-plugin-oauth2>OAuth2</a> plugin (Also coming to a CPAN mirror near you), it's absolutely trivial.</p><p>Here is a simple Lite example. Just register an app with facebook to get the key and secret.</p><pre>
-   use Mojolicious::Lite;
-   # configure the plugin
-   plugin 'oauth2', facebook => {
-       key => 'my-key',
-       secret => 'my-secret' };
-
-   get 'hello' => sub { 
-      My $self=shift;
-      #redirects the gets the token asynchronous   
-   $self->get_token('facebook', callback => sub {
-      my $token=shift;
-      my $me=$self->client->get(
-        'https://graph.facebook.com/me?access_token='.$token)->res->json;
-          $self->render( text =>
-            "Hello ".$me->{name} );
-    });
-</pre><p>As you can see, the plugin handles the request flow automatically. We then use the built in JSON parsing in the Mojolicious Client to turn the API data into structures we can work with in our application.</p><a href=/post/2011-01-08-easily-integrating-your-mojolicious-app-with-facebook/>Read More...</a></section><p class=post-meta><small>2011-01-08</small>
-&minus; &#127991;
-<a class=tag href=/tags/facebook>facebook</a>
-&#127991;
-<a class=tag href=/tags/mojolicious>mojolicious</a>
-&#127991;
-<a class=tag href=/tags/oauth>oauth</a>
-&#127991;
-<a class=tag href=/tags/oauth2>oauth2</a>
 &#127991;
 <a class=tag href=/tags/perl>perl</a></p></div><hr><ul class=pager><li class=next><a href=https://marcus.means.no//post/>Older Posts &rarr;</a></li></ul></div></div></div><hr><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a href=mailto:marcus@means.no><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
 <i class="fa-regular fa-envelope fa-stack-1x fa-inverse"></i></span></a></li><li><a rel=me href=https://hachyderm.io/@marcus><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>

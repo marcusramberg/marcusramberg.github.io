@@ -1,4 +1,132 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>marcus - marcus</title><link>https://marcus.means.no/https://marcus.means.no/</link><description>All entries in marcus on marcus</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Wed, 05 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://marcus.means.no/" rel="self" type="application/rss+xml"/><item><title>Fosdem 2025 Conference Report</title><link>https://marcus.means.no/post/2025-02-05-fosdem-conference-report/</link><pubDate>Wed, 05 Feb 2025 00:00:00 +0000</pubDate><author>marcus@means.no - Marcus Ramberg</author><guid>https://marcus.means.no/post/2025-02-05-fosdem-conference-report/</guid><description>&lt;p>Attended Fosdem again this year and had a blast. Made a conference report for work, so figure I
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>marcus - marcus</title><link>https://marcus.means.no/https://marcus.means.no/</link><description>All entries in marcus on marcus</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Code released under the MIT license.</copyright><lastBuildDate>Sun, 25 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://marcus.means.no/" rel="self" type="application/rss+xml"/><item><title>Building a Grafana Kiosk With Nixos</title><link>https://marcus.means.no/post/2025-05-25-building-a-grafana-kiosk-with-nixos/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><author>marcus@means.no - Marcus Ramberg</author><guid>https://marcus.means.no/post/2025-05-25-building-a-grafana-kiosk-with-nixos/</guid><description>&lt;p>At work, we&amp;rsquo;re passionate about data diven decisions. Among others we use
+&lt;a href="https://grafana.com/">Grafana&lt;/a> to visualize our key metrics .
+We recently acquired a number of dual TV stands for our teams, and we wanted to use them to display our Grafana dashboards.
+After experimenting with PI4s and finding the 4k support lacking, we decided to use go for a n100-based mini pc model.
+Flashing and maintaining a number of pcs can be painful, so we desided to use a declarative setup and flash stateless
+&lt;a href="https://nixos.org">NixOS&lt;/a> configurations. In order to bootstrap the PCs as quickly as possible, we use
+&lt;a href="https://github.com/chrillefkr/nixos-unattended-installer">nixos-unattended-installer&lt;/a> and &lt;a href="https://github.com/nix-community/disko">disko&lt;/a>.&lt;/p>
+&lt;p>From USB boot to installed on disk it&amp;rsquo;s less than 10 minutes, and we can bake in all the configuration we need,
+including team credentials and Grafana playlists to render. Using ssh we can also easily push new configurations if
+needed.&lt;/p>
+&lt;h2 id="disko">Disko&lt;/h2>
+&lt;p>When you have a set of identical machines, &lt;a href="https://github.com/nix-community/disko">disko&lt;/a> is awesome for partitioning
+and formatting disks. It&amp;rsquo;s a declarative way of configuring your partition layout, and it integrates great with
+nixos-unattended-installer.&lt;/p>
+&lt;p>First we need to add the disko module from the flake to our nixos system configuration
+partitions.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nix" data-lang="nix">&lt;span style="display:flex;">&lt;span> cs &lt;span style="color:#f92672">=&lt;/span> nixpkgs&lt;span style="color:#f92672">.&lt;/span>lib&lt;span style="color:#f92672">.&lt;/span>nixosSystem {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> system &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;x86_64-linux&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> modules &lt;span style="color:#f92672">=&lt;/span> [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> disko&lt;span style="color:#f92672">.&lt;/span>nixosModules&lt;span style="color:#f92672">.&lt;/span>disko
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">...&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>then we set up actual partitions&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nix" data-lang="nix">&lt;span style="display:flex;">&lt;span> disko&lt;span style="color:#f92672">.&lt;/span>devices&lt;span style="color:#f92672">.&lt;/span>disk&lt;span style="color:#f92672">.&lt;/span>nvme &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> device &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/dev/nvme0n1&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> type &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;disk&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> content &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> type &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;gpt&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> partitions &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ESP &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> type &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;EF00&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> size &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;500M&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> content &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> type &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;filesystem&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> format &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;vfat&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mountpoint &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/boot&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> root &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> size &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;100%&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> content &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> type &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;filesystem&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> format &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;ext4&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mountpoint &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>As you can see we&amp;rsquo;re just setting up a small UEFI esp partition and allocating the rest of the space to root.&lt;/p>
+&lt;h2 id="nioxs-unattended-installer">nioxs-unattended-installer&lt;/h2>
+&lt;p>This is a major win for us, as it&amp;rsquo;s a completely hands off installation process. Unfortunately we have to disable secure
+boot on the machines in the bios, if I had to do a lot more of them I&amp;rsquo;d probably automate the process using something
+like a PI sending usb keyboard keystrokes with something like the &lt;a href="https://pikvm.org/">pikvm&lt;/a> recorder.&lt;/p>
+&lt;p>We just have to use their disko wrapper around the defined nixos configuration:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nix" data-lang="nix">&lt;span style="display:flex;">&lt;span>cs-installer &lt;span style="color:#f92672">=&lt;/span> unattended-installer&lt;span style="color:#f92672">.&lt;/span>lib&lt;span style="color:#f92672">.&lt;/span>diskoInstallerWrapper self&lt;span style="color:#f92672">.&lt;/span>nixosConfigurations&lt;span style="color:#f92672">.&lt;/span>cs { };
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="graphics-environment">Graphics environment&lt;/h2>
+&lt;p>In this example we chose xfce4 as a desktop environment, it&amp;rsquo;s lightweight and supports multiple monitors in a way that&amp;rsquo;s
+pleasing to us. Having this also allows the team to debug any local issues like network problems, but if you want a more
+locked down environment you could also use something like cage or i3 and not support any system access.
+The nixos configuration looks something like this:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nix" data-lang="nix">&lt;span style="display:flex;">&lt;span> services&lt;span style="color:#f92672">.&lt;/span>xserver &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> enable &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">true&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> desktopManager&lt;span style="color:#f92672">.&lt;/span>xfce &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> enable &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">true&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> enableScreensaver &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">false&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> displayManager &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> lightdm &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> enable &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">true&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> greeters&lt;span style="color:#f92672">.&lt;/span>tiny&lt;span style="color:#f92672">.&lt;/span>enable &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">true&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>We have to setup the DM to ensure automatic login.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nix" data-lang="nix">&lt;span style="display:flex;">&lt;span>services&lt;span style="color:#f92672">.&lt;/span>displayManager &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> defaultSession &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;xfce4&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> autoLogin&lt;span style="color:#f92672">.&lt;/span>user &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;kiosk&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>};
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="grafana-kiosk">Grafana Kiosk&lt;/h2>
+&lt;h3 id="systemd-services">Systemd services&lt;/h3>
+&lt;p>The recommended way to run grafana kiosk is to use a systemd service. happily that is easy enough in nixos. This also
+ensures that the kiosk app is automatically restarted if it should crash.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nix" data-lang="nix">&lt;span style="display:flex;">&lt;span> systemd&lt;span style="color:#f92672">.&lt;/span>services &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> grafana-kiosk-1 &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> enable &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">true&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> after &lt;span style="color:#f92672">=&lt;/span> [ &lt;span style="color:#e6db74">&amp;#34;network.target&amp;#34;&lt;/span> ];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> wantedBy &lt;span style="color:#f92672">=&lt;/span> [ &lt;span style="color:#e6db74">&amp;#34;graphical.target&amp;#34;&lt;/span> ];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> description &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Grafana Kiosk Screen 1&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> serviceConfig &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> User &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;kiosk&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Restart &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;always&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> RestartSec &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;20&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> environment &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> DISPLAY &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;:0&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> XAUTHORITY &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/home/kiosk/.Xauthority&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> serviceConfig &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Type &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;simple&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ExecStartPre &lt;span style="color:#f92672">=&lt;/span> [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>pkgs&lt;span style="color:#f92672">.&lt;/span>xorg&lt;span style="color:#f92672">.&lt;/span>xset&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/bin/xset s off&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>pkgs&lt;span style="color:#f92672">.&lt;/span>xorg&lt;span style="color:#f92672">.&lt;/span>xset&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/bin/xset s noblank&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>pkgs&lt;span style="color:#f92672">.&lt;/span>xorg&lt;span style="color:#f92672">.&lt;/span>xset&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/bin/xset -dpms&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ExecStart &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>pkgs&lt;span style="color:#f92672">.&lt;/span>grafana-kiosk&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/bin/grafana-kiosk com -URL &lt;/span>&lt;span style="color:#e6db74">${&lt;/span>builtins&lt;span style="color:#f92672">.&lt;/span>elemAt settings&lt;span style="color:#f92672">.&lt;/span>playlists &lt;span style="color:#ae81ff">0&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In order to run multiple of these, you&amp;rsquo;d start the second one with a offset param to grafana -kiosk like
+-window-position 3841,0 for&lt;/p>
+&lt;p>Note that you&amp;rsquo;ll probably need to authentication to your Grafana instance, see the
+&lt;a href="https://github.com/grafana/grafana-kiosk">README&lt;/a> for details on various auth schemes. In our case we use IAP and
+provide a service account with minimal permissions per team. You might also want to adjust RestartSec for your setup for
+faster startup or to avoid restart back-off.&lt;/p>
+&lt;p>Other than that it&amp;rsquo;s pretty much stock nixos config, like setting up networking and adding the kiosk user and enabling
+openssh for remote management. I&amp;rsquo;ll leave that as an exercise for the reader. The &lt;a href="https://nixos.org/manual/nixos/stable/#ch-configuration">nixos manual&lt;/a>
+should come in handy.&lt;/p>
+&lt;p>Once you have this configuration in a flake, you can build a iso image for flashing using something like&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nix" data-lang="nix">&lt;span style="display:flex;">&lt;span>nix build &lt;span style="color:#e6db74">&amp;#34;path:.#nixosConfigurations.cs-installer.config.system.build.isoImage&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In this case we&amp;rsquo;re using path: to be able to include credentials without adding them to the git index.&lt;/p>
+&lt;h2 id="future-improvements">Future improvements&lt;/h2>
+&lt;ul>
+&lt;li>setting up a tunnel for management using something like &lt;a href="https://github.com/cloudflare/cloudflared">cloudflared&lt;/a> or
+&lt;a href="https://tailscale.net/">tailscale&lt;/a>. nix already has nice modules for configuring both of these.&lt;/li>
+&lt;li>Using something like &lt;a href="https://github.com/serokell/deploy-rs">deploy-rs&lt;/a> or
+(colmena](&lt;a href="https://github.com/zhaofengli/colmena">https://github.com/zhaofengli/colmena&lt;/a>) to do OTA updates.&lt;/li>
+&lt;li>Using external secrets management with something like &lt;a href="https://github.com/Mic92/sops-nix">sops-nix&lt;/a> to allow using a
+&lt;a href="https://www.maxdaten.io/2023-12-11-deploy-sops-secrets-with-nix">cloud kvm&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Fosdem 2025 Conference Report</title><link>https://marcus.means.no/post/2025-02-05-fosdem-conference-report/</link><pubDate>Wed, 05 Feb 2025 00:00:00 +0000</pubDate><author>marcus@means.no - Marcus Ramberg</author><guid>https://marcus.means.no/post/2025-02-05-fosdem-conference-report/</guid><description>&lt;p>Attended Fosdem again this year and had a blast. Made a conference report for work, so figure I
 might as well post it here too. :)&lt;/p></description></item><item><title>Managing Hugo With devenv</title><link>https://marcus.means.no/post/2024-01-21-managing-hugo-with-devenv/</link><pubDate>Sun, 21 Jan 2024 00:00:00 +0000</pubDate><author>marcus@means.no - Marcus Ramberg</author><guid>https://marcus.means.no/post/2024-01-21-managing-hugo-with-devenv/</guid><description>&lt;p>I am using the &lt;a href="https://gohugo.io/">Hugo&lt;/a> static site generator to generate this blog. I am also using
 &lt;a href="https://devenv.sh">devenv&lt;/a> to manage my development environments. This also includes the
 &lt;a href="https://github.com/marcusramberg/blog/">blog&lt;/a>. This ensures I can easily build and run the blog locally, and keep up to
@@ -345,5 +473,4 @@ the things!&lt;/p></description></item><item><title>Sandvika Ice Skaters</title>
 &lt;/div>
 &lt;p>I shot this with my DJI Mavic Pro in 4K. Unusual that it&amp;rsquo;s cold enough in Oslo for this to be possible.&lt;/p></description></item><item><title>Homemade chicken nuggets</title><link>https://marcus.means.no/post/2021-01-18-homemade-chicken-nuggets-/</link><pubDate>Mon, 18 Jan 2021 23:41:21 +0100</pubDate><author>marcus@means.no - Marcus Ramberg</author><guid>https://marcus.means.no/post/2021-01-18-homemade-chicken-nuggets-/</guid><description>&lt;figure>&lt;img src="https://marcus.means.no/images/2021-01-18-Homemade-chicken-nuggets-.jpg"
 alt="Homemade chicken nuggets " width="1280">
-&lt;/figure></description></item><item><title>Integrating EKS service accounts with AWS IAM</title><link>https://marcus.means.no/post/2021-01-04-integrating-eks-service-accounts-with-aws-iam/</link><pubDate>Mon, 04 Jan 2021 23:38:00 +0100</pubDate><author>marcus@means.no - Marcus Ramberg</author><guid>https://marcus.means.no/post/2021-01-04-integrating-eks-service-accounts-with-aws-iam/</guid><description>&lt;p>Been working on setting up a new EKS cluster for work lately, this post shows how to tie together IAM and EKS in a
-nice fashion using Terraform.&lt;/p></description></item></channel></rss>
+&lt;/figure></description></item></channel></rss>
